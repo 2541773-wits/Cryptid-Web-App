@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and registration test page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="formBox">
+            <form action="" name="form1" onsubmit="return registration_validation()">
+                <h2>Register</h2>
+                <p id="result"></p>
+                <div class="input-box">
+                    <ion-icon name="person"></ion-icon>
+                    <input type="text" name="Username" placeholder="Username" required>
+                </div>
+                <div class="input-box">
+                    <ion-icon name="mail"></ion-icon>
+                    <input type="email" name="Email" placeholder="Email" required>
+                </div>
+                <div class="input-box">
+                    <ion-icon name="lock-closed"></ion-icon>
+                    <input type="password" name="Password" placeholder="Password" required>
+                </div>
+                <div class="input-box">
+                    <ion-icon name="lock-closed"></ion-icon>
+                    <input type="password" name="cPassword" placeholder="Confirm Password" required>
+                </div>
+                <div class="button">
+                    <input type="submit" class="btn" onclick="registration_validation()" value="Register">
+                </div>
+                <div class="group span a">
+                    <span><a href="login.html" >Already have an Account?</a></span>
+                </div>
+            </form>
+        </div>
+        <div class="popup" id="popup">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <h2>Thank you!</h2>
+            <p>You have compelted your registration!</p>
+            <a href="login.html"><button onclick="closeSlide()">OK</button></a>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>
