@@ -6,6 +6,7 @@
     <title>Login and registration test page</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="main.js" defer type="module"></script>
 </head>
 <body>
     <main class="container">
@@ -31,7 +32,9 @@
                 <input type="submit" class="btn" onclick="registration_validation()" value="Register">
             <nav class="group">
                 <a href="index.html" >Already have an Account?</a>
-                <a>Sign in with Google</a>
+                <a><button id="google-login-btn" class="google-button">
+                    <i class="text1">SignIn with Google</i>
+                </button></a>
             </nav>
         </form>
         
