@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login and registration test page</title>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer type="module"></script>
+    <script src="index.js" defer type="module"></script>
 </head>
 <body>
     <main class="container">
@@ -13,7 +13,7 @@
             <h2>Login</h2>
             <label class="input-box">
                 <ion-icon name="person"></ion-icon>
-                <input type="text" name="Username" placeholder="Username/Email">
+                <input type="text" name="Username" placeholder="Username/Email" autocomplete="given-name">
             </label>
             <label class="input-box">
                 <ion-icon name="lock-closed"></ion-icon>
@@ -25,10 +25,15 @@
                 <a href="registration.html">Do not have an account yet?</a>
             </nav>
         </form>
-
+        <nav class="group1">
+            <a><button id="google-signin-btn" class="google-button1">
+                <i class="text2">SignIn with Google</i>
+            </button></a>
+        </nav>
     </main>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     
 </body>
 </html>
+
