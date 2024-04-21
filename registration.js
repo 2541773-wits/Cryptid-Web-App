@@ -31,4 +31,20 @@ import { getAuth, GoogleAuthProvider,signInWithPopup } from "https://www.gstatic
  });
  })
 
- 
+ async function create(userN,pWord,isA) {
+
+  const data = {
+    username: userN,
+    password: pWord,
+    is_admin: isA
+  };
+
+  const endpoint = `/data-api/rest/User/`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  const result = await response.json();
+  console.table(result.value);
+}

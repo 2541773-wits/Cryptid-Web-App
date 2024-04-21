@@ -1,6 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider,signInWithPopup } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
+
+
  const firebaseConfig = {
    apiKey: "AIzaSyDQ3jIzcDONPa7oN1gFpRsLJ0wHEZcj7LA",
    authDomain: "login-31be4.firebaseapp.com",
@@ -31,4 +33,12 @@ import { getAuth, GoogleAuthProvider,signInWithPopup } from "https://www.gstatic
 });
 })
 
- 
+// async function list() {
+//   const endpoint = '/data-api/rest/User';
+//   const response = await fetch(endpoint);
+//   const data = await response.json();
+//   console.table(data.value);
+//   console.log("printing list");
+// }
+
+// list();

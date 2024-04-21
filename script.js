@@ -36,3 +36,4 @@ function closeSlide(){
         document.getElementById("result").style.visibility = "hidden";
     }
 }
+
