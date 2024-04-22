@@ -1,42 +1,31 @@
 {
   "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.9.7/dab.draft.schema.json",
   "data-source": {
-    "database-type": "mssql",
-    "options": {
-      "set-session-context": false 
-    },
-    "connection-string": "Server=tcp:cryptid-web-app-sqlserver.database.windows.net,1433;Initial Catalog=Cryptid-Web-App-Database;Persist Security Info=False;User ID=team;Password=Azureuser123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    "database-type": "mysql",
+    "connection-string": "",
+    "options": {}
   },
   "runtime": {
     "rest": {
       "enabled": true,
-      "path": "/rest"
+      "path": "/rest",
+      "request-body-strict": true
     },
     "graphql": {
-      "allow-introspection": true,
       "enabled": true,
-      "path": "/graphql"
+      "path": "/graphql",
+      "allow-introspection": true
     },
     "host": {
-      "mode": "production",
       "cors": {
         "origins": [],
         "allow-credentials": false
       },
       "authentication": {
         "provider": "StaticWebApps"
-      }
+      },
+      "mode": "production"
     }
   },
-  "entities": {
-    "User": {
-      "source": "dbo.User",
-      "permissions": [
-        {
-          "actions": ["*"],
-          "role": "anonymous"
-        }
-      ]
-    }
-  }
+  "entities": {}
 }
