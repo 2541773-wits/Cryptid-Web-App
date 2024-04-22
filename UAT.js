@@ -6,7 +6,7 @@ function nonexistentUsername_login_prevent(){
 
 }
 
-function correctDetails_login_allow(){
+function correctDetails_registration_allow(){
 
 }
 
