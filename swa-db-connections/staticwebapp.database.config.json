@@ -1,11 +1,11 @@
 {
-  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.9.7/dab.draft.schema.json",
   "data-source": {
     "database-type": "mssql",
     "options": {
       "set-session-context": false 
     },
-    "connection-string": "@env('DATABASE_CONNECTION_STRING')"
+    "connection-string": "Server=tcp:cryptid-web-app-sqlserver.database.windows.net,1433;Initial Catalog=Cryptid-Web-App-Database;Persist Security Info=False;User ID=team;Password=Azureuser123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   },
   "runtime": {
     "rest": {
@@ -20,7 +20,7 @@
     "host": {
       "mode": "production",
       "cors": {
-        "origins": ["http://localhost:4280"],
+        "origins": [],
         "allow-credentials": false
       },
       "authentication": {

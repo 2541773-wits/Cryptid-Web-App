@@ -27,7 +27,7 @@ function registration_validation(){
         console.log(document.form1.Username.value);
         console.log(document.form1.Email.value);
         console.log(document.form1.Password.value);
-        create(document.form1.Username.value,document.form1.Password.value,false);
+        create(document.form1.Username.value,document.form1.Password.value,false,document.form1.Email.value);
         popup.classList.add("open-slide");
         return false;
     }
@@ -42,12 +42,13 @@ function closeSlide(){
     }
 }
 
-async function create(userN,pWord,isA) {
+async function create(userN,pWord,isA,em) {
 
     const data = {
       username: userN,
       password: pWord,
-      is_admin: isA
+      is_admin: isA,
+      email: em
     };
   
     const endpoint = `/data-api/rest/User/`;
