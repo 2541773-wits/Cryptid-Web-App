@@ -4,7 +4,7 @@
     "requires": true,
     "packages": {},
     "scripts": {
-  "build": "npm run build:azure"
+  "build": "npm run build"
     }
 
 }
