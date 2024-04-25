@@ -17,6 +17,3 @@ test('Get board configurations from hard mapcode',()=>{
     };
     expect(get_board_configuration("1A925C52791A131449832B")).toStrictEqual(gameBoard)
 })
-
-
-
