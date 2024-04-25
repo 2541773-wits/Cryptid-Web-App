@@ -67,3 +67,5 @@ function get_board_configuration(mapCode){
     
     return boardConfig;
 }
+
+module.exports = get_board_configuration;
