@@ -4,6 +4,6 @@
   },
   "scripts": {
     "test":"jest",
-    "build":"azure"
+    "build":"npm run build"
   }
 }
