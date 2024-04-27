@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page Cryptid</title>
+    <link rel="stylesheet" href="home_style.css">
+    <script src="home-page-buttons.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Cryptid</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="home.html">Game</a></li>
+            <li><a href="https://www.ospreypublishing.com/uk/cryptid-9781472830654/" target="_blank">Learn to play</a></li>
+            <li><a href="setting.html">Settings</a></li>
+            
+        </ul>
+        
+    </nav>
+
+    <main>
+        <section class="tutorial" id="tutorial">
+            <h1 style="background-color: yellow;">tutorial <button id="close" class="buttonClosed">x</button></h1>
+            <p id="text-content"></p>
+            <button id="show" class="buttonShow">Next</button>
+            <button id="previous" class="prevBtn">Previous</button>
+        </section>
+        <section id="game">
+            <!-- Content for the bottom section on the right -->
+            <h1 style="background-color: black; color: white;">New Game</h1>
+            <label for="num-plyers"><h3>Please select number of players</h3></label>
+            <select id="num-plyers" class="drop-down">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <input type="checkbox" id="switch" class="switch"><label for="switch" style="font-size: 20px;">Advance Mode</label>
+            <button id="explanation" class="explainBtn"><ion-icon name="help-circle-outline"></ion-icon></button>
+            <button id="start" class="startBtn">Start Game</button>
+        </section>
+    </main>
+    <section id="advance" class="advance">
+        <p>Advanced Mode offers more of a puzzle for players familiar with the game.</p>
+        <p>In Advanced Mode, you could be given the opposite of a clue from normal mode, so you might get "the habitat is <b>not</b> within two spaces of bear territory" as your clue.</p>
+        <p>The black structures are also used in Advanced Mode.</p>
+        <button id="noExplain" class="noExplain">Close</button>
+    </section>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+</body>
+</html>
