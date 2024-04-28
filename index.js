@@ -32,13 +32,3 @@ import { getAuth, GoogleAuthProvider,signInWithPopup } from "https://www.gstatic
   
 });
 })
-
-async function list() {
-  const endpoint = '/data-api/rest/User';
-  const response = await fetch(endpoint);
-  const data = await response.json();
-  console.table(data.value);
-  console.log("printing list");
-}
-
-list();

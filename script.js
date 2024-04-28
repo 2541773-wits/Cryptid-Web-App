@@ -23,10 +23,10 @@ function registration_validation(){
         return false;
     }
     else if(document.form1.Password.value === document.form1.cPassword.value){
-        console.log("This user has been added to the database");
-        console.log(document.form1.Username.value);
-        console.log(document.form1.Email.value);
-        console.log(document.form1.Password.value);
+        // console.log("This user has been added to the database");
+        // console.log(document.form1.Username.value);
+        // console.log(document.form1.Email.value);
+        // console.log(document.form1.Password.value);
         create(document.form1.Username.value,document.form1.Password.value,false,document.form1.Email.value);
         popup.classList.add("open-slide");
         return false;
@@ -58,6 +58,6 @@ async function create(userN,pWord,isA,em) {
       body: JSON.stringify(data)
     });
     const result = await response.json();
-    console.table(result.value);
+    //console.table(result.value);
   }
 
