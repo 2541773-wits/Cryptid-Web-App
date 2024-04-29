@@ -25,20 +25,10 @@ import { getAuth, GoogleAuthProvider,signInWithPopup } from "https://www.gstatic
 .then((result) => {
   const user = result.user;
   console.log(user);
-  window.location.href ="../Loggedin.html";
+  window.location.href ="../home.html";
 }).catch((error) => {
   const errorCode = error.code;
   const errorMessage = error.message;
   
 });
 })
-
-// async function list() {
-//   const endpoint = '/data-api/rest/User';
-//   const response = await fetch(endpoint);
-//   const data = await response.json();
-//   console.table(data.value);
-//   console.log("printing list");
-// }
-
-// list();

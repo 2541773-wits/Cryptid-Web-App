@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login and registration test page</title>
     <link rel="stylesheet" href="style.css">
+    <script src="login-validation.js"></script>
     <script src="index.js" defer type="module"></script>
 </head>
 <body>
     <main class="container">
-        <form action="" name="form1">
+        <form action="" name="form1" onsubmit="return login_validation()">
             <h2>Login</h2>
             <label class="input-box">
                 <ion-icon name="person"></ion-icon>
@@ -25,6 +26,21 @@
                 <a href="registration.html">Do not have an account yet?</a>
             </nav>
         </form>
+
+        <section class="popup" id="popup">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <h2>Thank you!</h2>
+            <p>Login Successful!</p>
+            <a href="home.html"><button onclick="closeSlide()">OK</button></a>
+        </section>
+
+        <section class="popup" id="popupUserNotFound">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <h2>ERROR</h2>
+            <p>Username/Email or Password was incorrect</p>
+            <a href="index.html"><button onclick="closeSlideUserNotFound()">OK</button></a>
+        </section>
+
         <nav class="group1">
             <a><button id="google-signin-btn" class="google-button1">
                 <i class="text2">SignIn with Google</i>
@@ -36,4 +52,3 @@
     
 </body>
 </html>
-
