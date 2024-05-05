@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const middle = document.createElement('div');
             middle.className = 'middle';
             middle.classList.add(rearrangedBoard[k][i]);
-            middle.classList.add(k + ',' + i);
+            middle.id = k + ',' + i;
 
             const right = document.createElement('div');
             right.className = 'right';
@@ -452,7 +452,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const hintContent = this.nextElementSibling;
         hintContent.classList.toggle('active');
     });
+
+    startGame(num_players);
 });
+
+
+
+
+function startGame(numPlayers) {
+    let bool = true;
+    const instructions = document.getElementById("instructions");
+    const board = document.getElementById("container");
+
+    // Function to handle click event for each player
+    function handleClickForPlayer(event) {
+        if (event.target.classList.contains('middle')) {
+            const hex = document.getElementById(event.target.id);
+
+            // Add image on block
+            let cube = document.createElement('img');
+            // cube.src = ""
+            hex.appendChild(cube);
+
+            // Remove event listener after click
+            board.removeEventListener('click', handleClickForPlayer);
+        }
+    }
+
+    // Function to add event listener for each player
+    function addEventListenerForPlayer(player) {
+        instructions.textContent = "Player " + player + " look at your clue and place your cube";
+        board.addEventListener('click', handleClickForPlayer);
+    }
+
+    
+    for (let k = 0; k < numPlayers; k++) {
+        addEventListenerForPlayer(k);
+    }
+}
+
 
 
 
