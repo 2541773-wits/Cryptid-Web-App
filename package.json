@@ -1,0 +1,14 @@
+{
+    "name": "@codecov/example-javascript",
+    "version": "0.0.1",
+    "description": "Code Coverage",
+    "devDependencies": {
+      "jest": "^29.7.0",
+      "jest-environment-jsdom": "^29.7.0",
+      "jsdom": "^24.0.0"
+    },
+    "scripts": {
+      "test": "jest"
+    }
+  }
+  

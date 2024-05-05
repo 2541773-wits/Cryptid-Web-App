@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function(){
     const closeBtn = document.getElementById("close");
     const explainBtn = document.getElementById("explanation");
     const noExplainBtn = document.getElementById("noExplain");
+    const tutorialCheckbox = document.getElementById("showTut");
+
+    const tutorial = document.getElementById("tutorial");
+    const game = document.getElementById("game");
+    let tutorialOffsetHeight = tutorial.offsetHeight;
+    const gameOffsetHeight = game.offsetHeight;
 
     nextBtn.addEventListener("click", function() {
         currentMessageIndex++;
@@ -44,13 +50,9 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     closeBtn.addEventListener("click", function() {
-        const tutorial = document.getElementById("tutorial");
-        const game = document.getElementById("game");
-        tutorial.style.visibility = "hidden";
-        nextBtn.style.visibility = "hidden";
-        prevBtn.style.visibility = "hidden";
-        const tutorialHeight = tutorial.offsetHeight;
-        game.style.marginTop = `-${tutorialHeight}px`;
+        hideTut();
+        tutorialCheckbox.checked = false;
+        // const tutorialHeight = tutorial.offsetHeight;
     });
 
     explainBtn.addEventListener("click", function(){
@@ -62,18 +64,39 @@ document.addEventListener("DOMContentLoaded", function(){
         const explanation = document.getElementById("advance");
         explanation.style.visibility = "hidden";
     });
+
+    function showTut(){
+        tutorial.style.visibility = "visible";
+        nextBtn.style.visibility = "visible";
+        prevBtn.style.visibility = "visible";
+        game.style.marginTop = `0px`;
+    }
+
+    function hideTut(){
+        tutorial.style.visibility = "hidden";
+        nextBtn.style.visibility = "hidden";
+        prevBtn.style.visibility = "hidden";
+        tutorialOffsetHeight = tutorial.offsetHeight;
+        game.style.marginTop = `-${tutorialOffsetHeight}px`;
+        tutorialCheckbox.checked = false;
+        localStorage.setItem('checkboxChecked', false);
+    }
+
+
+    tutorialCheckbox.addEventListener("change", function() {
+        if(tutorialCheckbox.checked === true){
+            showTut();
+        }
+        else if(tutorialCheckbox.checked === false){
+            hideTut();
+        }
+    });
+
+
+
+
+
+
       
 
-
-    const startBtn = document.getElementById('start');
-    startBtn.addEventListener("click",()=>{
-       // window.location.href = "game.html";
-        let selectElement = document.getElementById("num-plyers");
-        let numPlayers = selectElement.options[selectElement.selectedIndex].value;
-        let switchElement = document.getElementById("switch");
-        let advanced = switchElement.checked;
-        sessionStorage.setItem("advanced",advanced);
-        sessionStorage.setItem("numPlayers",numPlayers);
-        window.location.href = "game.html";
-    })
 });

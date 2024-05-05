@@ -104,9 +104,13 @@ function get_board_configuration(mapCode){
 
     //Shift number back one - wrap around
     const sub1 = numbers.map(number=>{
-        return number-1
-
+        if(number===1){
+            return 6
+        } else {
+            return number-1
+        }
     });
+
 
     const sub5 = sub1.map(number=>{
         if (number<=5){
@@ -724,9 +728,13 @@ function choosePlayer(playerAsking) {
 
 
 
-module.exports.get_game_config = get_game_config;
-module.exports.get_board_configuration = get_board_configuration;
-module.exports.get_destination = get_destination;
-module.exports.get_clues = get_clues;
-module.exports.get_hint = get_hint;
-module.exports.getSubmatrix = getSubmatrix;
+
+
+module.exports = {
+    get_game_config: get_game_config,
+    get_board_configuration: get_board_configuration,
+    get_destination: get_destination,
+    get_clues: get_clues,
+    get_hint: get_hint,
+    getSubmatrix: getSubmatrix,
+};
