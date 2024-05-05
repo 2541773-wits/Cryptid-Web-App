@@ -68,7 +68,7 @@ advanced_maps = [
 ]
 
 
-const board = [
+let board = [
     ["water", "water", "water", "water", "forest", "forest", "swamp", "forest", "forest", "forest", "forest", "forest"],
     ["swamp", "swamp", "water", "desert", "forest", "forest", "swamp", "swamp", "forest", "desert", "desert", "desert"],
     ["swamp", "swamp", "desert", "desert", "desert", "forest", "swamp", "mountain", "mountain", "mountain", "mountain", "desert"],
@@ -464,3 +464,4 @@ module.exports.get_board_configuration = get_board_configuration;
 module.exports.get_destination = get_destination;
 module.exports.get_clues = get_clues;
 module.exports.get_hint = get_hint;
+module.exports.getSubmatrix = getSubmatrix;
