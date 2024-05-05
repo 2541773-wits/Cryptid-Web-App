@@ -66,7 +66,13 @@
       const username = document.forms["form1"]["Username"].value;
       const password = document.forms["form1"]["Password"].value;
 
-      return login_validation(username, password);
+      const isValid = login_validation(username, password);
+
+      if(!isValid){
+        return false;
+      }
+
+      return true;
 
   }
 

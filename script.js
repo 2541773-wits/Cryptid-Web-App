@@ -24,9 +24,11 @@ function registration_validation(username, email, password, confirmPassword) {
         return false;
     }
 
-    create(username,password,false,email);
-    popup.classList.add("open-slide");
-    return true;
+    else if(password === confirmPassword){
+        create(username,password,false,email);
+        popup.classList.add("open-slide");
+        return true;
+    }
 }
 
 function closeSlide(){
@@ -49,8 +51,11 @@ function validateRegistration() {
     // Call registration_validation with form values
     const isValid = registration_validation(username, email, password, confirmPassword);
 
+    if(!isValid){
+        return false;
+    }
     // If validation fails, prevent form submission
-    return isValid;
+    return true;
 }
 
 
