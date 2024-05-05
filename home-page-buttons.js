@@ -92,7 +92,16 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 
-
+    const startBtn = document.getElementById("start");
+    startBtn.addEventListener("click", () => {
+        let selectElement = document.getElementById("num-plyers");
+        let numPlayers = selectElement.options[selectElement.selectedIndex].value;
+        let switchElement = document.getElementById("switch");
+        let advanced = switchElement.checked;
+        sessionStorage.setItem("advanced", advanced);
+        sessionStorage.setItem("numPlayers", numPlayers);
+        window.location.href = "game.html";
+    })
 
 
 
