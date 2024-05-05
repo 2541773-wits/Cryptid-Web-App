@@ -188,6 +188,10 @@ body{
     display: block;
 }
 
+.instructions{
+    display: flex;
+}
+
 
 /* Style for the section containing clues */
 #clues {
