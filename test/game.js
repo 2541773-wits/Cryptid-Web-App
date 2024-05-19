@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     let advanced = sessionStorage.getItem("advanced");
-    let num_players = 3;//sessionStorage.getItem("numPlayers");
+    let num_players = sessionStorage.getItem("numPlayers");
     let map;
     if (advanced) {
         map = advanced_maps[Math.floor(Math.random() * advanced_maps.length)];
@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i % 2 != 0) {
                 hex.classList.add('even');
             }
-           // hex.id = k + ',' + i;
+            //hex.id = k + ',' + i;
             const left = document.createElement('header');
             left.className = 'left';
             left.classList.add(rearrangedBoard[k][i]);
@@ -533,9 +533,9 @@ document.addEventListener('DOMContentLoaded', () => {
             hex.appendChild(middle);
             hex.appendChild(right);
             hexRow.appendChild(hex);
-            hex.addEventListener('click', function() {
-                console.log(hex.id);
-            });
+           // hex.addEventListener('click', function() {
+           //     console.log(hex.id);
+           // });
 
             const towerIndex = towers.findIndex(([row, col]) => row === k && col === i);
             if (towerIndex != -1) {
@@ -633,6 +633,7 @@ function updateClueDisplay(currentPlayer) {
     });
 }
 
+/*
 function startGame(numPlayers, clues) {
     let currentPlayer = 0; // Variable to keep track of the current player
     let currentRound = 0; // Variable to keep track of the current round
@@ -719,7 +720,7 @@ function startGame(numPlayers, clues) {
     // Initial update of clue display
     updateClueDisplay(currentPlayer);
 }
-
+*/
 function displayPlayerOptions(player) {
     // Create a container for the buttons
     const optionsContainer = document.createElement('div');

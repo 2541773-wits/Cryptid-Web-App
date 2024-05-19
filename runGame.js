@@ -1,4 +1,5 @@
 // script.js
+/*
 document.addEventListener('DOMContentLoaded', () => {
     const accordionHeader = document.querySelector('.accordion-header');
     const accordionContent = document.querySelector('.accordion-content');
@@ -15,15 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("getSelectedValueBtn").style.display = 'none';
     
 });
-
+*/
 
 class game{
-    constructor(numPlayers){
+    constructor(numPlayers,clues,hint){
         this.numPlayers = numPlayers;
         this.currPlayer = 0;
         this.prevPlayer=0;
         this.playerDiscs = Array.from({ length: this.numPlayers }, () => new Set()); // To track player discs on the board
         this.playerCubes = Array.from({ length: this.numPlayers }, () => new Set()); // To track player discs on the board
+        this.clues = clues;
+        this.hint = hint;
     }
 
     getNumPlayers(){
@@ -66,8 +69,9 @@ class game{
 }
 
 class boardInfo {
-    constructor(gameInstance){
+    constructor(gameInstance,recordInstance){
         this.gameInstance = gameInstance;
+        this.recordInstance = recordInstance;
     }
 
     optionBtnListener() {
@@ -134,6 +138,8 @@ class boardInfo {
         
         info.innerHTML = "Choose a tile";
         let clickedDivId = await this.tileListener();
+        
+        this.placePawn(clickedDivId);
         info.innerHTML ="Choose a player to ask";
         document.getElementById("getSelectedValueBtn").style.display = 'block';
         this.populateSelect();
@@ -142,6 +148,7 @@ class boardInfo {
 
         try{
             const player = await this.getPlayerToAsk();
+            this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Asked player "+player,clickedDivId);
             this.gameInstance.changePlayer(player);
             this.nextClue(this.gameInstance.getCurrPlayer());
             selectElement.style.display='none';
@@ -154,16 +161,22 @@ class boardInfo {
             document.getElementById("btnNo").style.display = 'none';
             if(clickedButtonId==="btnYes"){
                 //put disc on board
+                //this.placeDisc(this.gameInstance.getCurrPlayer(),clickedDivId);
+                this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered yes",clickedDivId);
+                document.getElementById(clickedDivId).childNodes[0].src ="img/disc.png";
                 this.gameInstance.goToCurrPlayer();
             }
             else{
                 //put cube on board
+                this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered no",clickedDivId);
                 this.gameInstance.goToCurrPlayer();
+                document.getElementById(clickedDivId).childNodes[0].src ="img/disc.png";
                 this.nextClue(this.gameInstance.getCurrPlayer());
 
                 info.innerHTML = "Player " + (this.gameInstance.getCurrPlayer()+1) + " please place a cube."
                 clickedDivId = await this.tileListener();
-                //place cube
+                this.placeCube(this.gameInstance.getCurrPlayer(),clickedDivId);
+                this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Placed a cube",clickedDivId);
             }
 
         }
@@ -181,10 +194,12 @@ class boardInfo {
 
     tileListener() {
         return new Promise((resolve, reject) => {
-            const divContainer = document.getElementById("divContainer");
+            const divContainer = document.getElementById("container");
+    
             const clickHandler = (event) => {
                 const clickedDivId = event.target.id;
                 if (clickedDivId) {
+                   // divContainer.removeEventListener("click", clickHandler);
                     resolve(clickedDivId); // Resolve the Promise with the ID of the clicked div
                     // Remove the event listener after the first click
                     divContainer.removeEventListener("click", clickHandler);
@@ -192,21 +207,34 @@ class boardInfo {
                     reject("No div ID found."); // Reject the Promise if no ID is found
                 }
             };
+    
+            // Attach the event listener to the container
             divContainer.addEventListener("click", clickHandler);
         });
     }
+    
+    
 
     async handleInitialClicks() {
         const info = document.getElementById("instructions");
-        for (let k=0; k<this.gameInstance.getNumPlayers()*2; k++) {
+        const divContainer = document.getElementById("container");
+        for (let k=0; k<(this.gameInstance.getNumPlayers()*2); k++) {
             try {
                 info.innerHTML="Please place your cube player " + (this.gameInstance.getCurrPlayer()+1);
                 this.nextClue(this.gameInstance.getCurrPlayer());
                 const clickedDivId = await this.tileListener();
-                this.placeCube(this.gameInstance.getCurrPlayer(),clickedDivId);
+                this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Initial cube",clickedDivId);
+                let div = document.getElementById(clickedDivId);
+
+                if (div.querySelector('img')===null){
+                    this.placeCube(this.gameInstance.getCurrPlayer(),clickedDivId);
+                }
+                //div? div.querySelector('img')===null: this.placeCube(this.gameInstance.getCurrPlayer(),clickedDivId);
+                
                 //change accordion content
                 console.log("Clicked on div with ID:", clickedDivId);
                 this.gameInstance.nextPlayer();
+                divContainer.removeEventListener("click", this.tileListener);
             } catch (error) {
                 console.error("Error:", error);
             }
@@ -219,6 +247,7 @@ class boardInfo {
         const accordionHeader = document.querySelector('.accordion-header');
         const accordionContent = document.querySelector('.accordion-content');
         accordionHeader.innerHTML = "Player " + (player+1);
+        accordionContent.innerHTML = this.gameInstance.clues[player];
         accordionContent.style.display = 'none';
     }
 
@@ -257,9 +286,10 @@ class boardInfo {
         const info = document.getElementById("instructions");
         info.innerHTML = "Choose a tile for your search";
         let searchSpace = await this.tileListener();
-    
+        this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Chose to search",searchSpace);
+        this.placePawn(searchSpace);
         // Ensure placement of player's own disc
-        this.placeDisc(originalSearcher, searchSpace);
+        //this.placeDisc(originalSearcher, searchSpace);
     
         // Move to the next player
         this.gameInstance.nextPlayer();
@@ -281,11 +311,15 @@ class boardInfo {
                 document.getElementById("btnNo").style.display = 'none';
     
                 if (clickedButtonId === "btnYes") {
-                    if (this.canPlaceDisc(currentPlayer, searchSpace)) {
+                   // if (this.canPlaceDisc(currentPlayer, searchSpace)) {
+                        this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered yes to search",searchSpace);
+                        document.getElementById(searchSpace).childNodes[0].src ="img/disc.png";
                         this.placeDisc(currentPlayer, searchSpace);
-                    }
+                   // }
                 } else if (clickedButtonId === "btnNo") {
+                    this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered no to search",searchSpace);
                     allYes = false;
+                    document.getElementById(searchSpace).childNodes[0].src ="img/cube.png";
                     this.placeCube(currentPlayer, searchSpace);
                     break;
                 } else {
@@ -318,21 +352,51 @@ class boardInfo {
 
     placeDisc(player,space){
         this.gameInstance.playerDiscs[player].add(space);
+        const hex = document.getElementById(space);
+    
+        if (hex.querySelector('img')===null){
+            let disc = document.createElement('img');
+            disc.src = "img/disc.png"
+            hex.appendChild(disc);
+        }
+            // Add image on block
+            
         //add disc to board
     }
 
     placeCube(player,space){
-        this.gameInstance.playerCubes[player].add(space);
-        //add cube to board
+       // if (document.getElementById(space).classList.contains("middle")){
+            this.gameInstance.playerCubes[player].add(space);
+            //add cube to board
+            const hex = document.getElementById(space);
+            if (hex.querySelector('img')===null){
+                let cube = document.createElement('img');
+                cube.src = "img/cube.png"
+                hex.appendChild(cube);
+            }
+            // Add image on block
+            
+      //  }
+    }
+
+    placePawn(space){
+        const hex = document.getElementById(space);
+            if (hex.querySelector('img')===null){
+                let cube = document.createElement('img');
+                cube.src = "img/star.png"
+                hex.appendChild(cube);
+            }
     }
     
 }
 
 
 
-async function runGame(){
-    const currGame = new game(4);
-    const board = new boardInfo(currGame);
+async function runGame(numPlayers,clues,hint){
+    const gameRecord = new GameRecord();
+
+    const currGame = new game(numPlayers,clues,hint);
+    const board = new boardInfo(currGame,gameRecord);
     let over = false;
     document.getElementById('numberSelect').style.display='none';
     const info = document.getElementById("instructions");
@@ -359,7 +423,53 @@ async function runGame(){
         //document.getElementById("btnAsk").style.display = 'none';
        // document.getElementById("btnSearch").style.display = 'none';
     };//while
-    console.log("end");
+    console.log(gameRecord.toJSON());
+    gameRecord.saveJSON(gameRecord.toJSON,"idk");
 }
-runGame();
 
+
+//runGame(3,["1","2","3"],"hello");
+
+class PlayerMove {
+    constructor(player, action, location) {
+        this.player = player;
+        this.action = action;
+        this.location = location;
+    }
+}
+
+class GameRecord {
+    constructor() {
+        this.moves = [];
+    }
+
+    recordMove(player, action, location) {
+        const move = new PlayerMove(player, action, location);
+        this.moves.push(move);
+    }
+
+    toJSON() {
+        return JSON.stringify(this.moves);
+    }
+
+    saveJSON(jsonData,filename){
+        // Create a Blob from the JSON data
+    const blob = new Blob([jsonData], { type: 'application/json' });
+
+    // Create a temporary URL for the Blob
+    const url = URL.createObjectURL(blob);
+
+    // Create a link element
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+
+    // Append the link to the document body and trigger a click event to start the download
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up by removing the link and revoking the URL
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    }
+}
