@@ -420,6 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i % 2 != 0) {
                 hex.classList.add('even');
             }
+            hex.id = k + ',' + i;
             const left = document.createElement('header');
             left.className = 'left';
             left.classList.add(rearrangedBoard[k][i]);
@@ -489,6 +490,9 @@ document.addEventListener('DOMContentLoaded', () => {
             hex.appendChild(middle);
             hex.appendChild(right);
             hexRow.appendChild(hex);
+            hex.addEventListener('click', function() {
+                console.log(hex.id);
+            });
 
             const towerIndex = towers.findIndex(([row, col]) => row === k && col === i);
             if (towerIndex != -1) {
@@ -623,6 +627,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const hintContent = this.nextElementSibling;
         hintContent.classList.toggle('active');
     });
+
+
 
     startGame(num_players,clues);
 });
