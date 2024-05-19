@@ -61,6 +61,14 @@ body {
     box-shadow: 3px 0 10px black;
     margin-bottom: 30px;
 }
+.google-button1{
+    background-color:blue;
+    color:white;
+}
+.google-button{
+    background-color:blue;
+    color:white;
+}
 
 .group {
     display: flex;
