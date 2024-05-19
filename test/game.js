@@ -185,8 +185,33 @@ function get_clues(gameConfigs){
         "within_green": "The habitat is within three spaces of a green structure",
         "within_red": "The habitat is within three spaces of a white structure",
         "within_blue": "The habitat is within three spaces of a blue structure",
-        "within_black": "The habitat is within three spaces of a black structure"
-    };
+        "within_black": "The habitat is within three spaces of a black structure",
+        "not_water_or_desert": "The habitat is not on water or desert",
+        "not_water_or_mountain": "The habitat is not on water or mountain",
+        "not_water_or_forest": "The habitat is not on water or forest",
+        "not_water_or_bone": "The habitat is not on water or swamp",
+        "not_forest_or_desert": "The habitat is not on forest or desert",
+        "not_forest_or_mountain": "The habitat is not on forest or mountain",
+        "not_forest_or_bone": "The habitat is not on forest or swamp",
+        "not_desert_or_mountain": "The habitat is not on desert or mountain",
+        "not_desert_or_bone": "The habitat is not on desert or swamp",
+        "not_mountain_or_bone": "The habitat is not on mountain or swamp",
+        "not_within_water": "The habitat is not within one space of water",
+        "not_within_forest": "The habitat is not within one space of forest",
+        "not_within_desert": "The habitat is not within one space of desert",
+        "not_within_mountain": "The habitat is not within one space of mountain",
+        "not_within_bone": "The habitat is not within one space of swamp",
+        "not_within_fissure": "The habitat is not within one space of either animal territory",
+        "not_within_pyramid": "The habitat is not within two spaces of a standing stone",
+        "not_within_colony": "The habitat is not within two spaces of a shack",
+        "not_within_dormant_fissure": "The habitat is not within two spaces of a bear territory",
+        "not_within_active_fissure": "The habitat is not within two spaces of a cougar territory",
+        "not_within_green": "The habitat is not within three spaces of a green structure",
+        "not_within_red": "The habitat is not within three spaces of a white structure",
+        "not_within_blue": "The habitat is not within three spaces of a blue structure",
+        "not_within_black": "The habitat is not within three spaces of a black structure"
+    }
+    
     return gameConfigs.rules.map(rule => dict[rule] || rule);
 }
 
