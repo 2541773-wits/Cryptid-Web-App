@@ -1,4 +1,4 @@
-let game_num = 1;
+let game_num = 3;
 //let num_players = 4;
 
 intro_maps =[
@@ -151,7 +151,7 @@ function get_board_configuration(mapCode){
 
 
 function get_game_config(map,numPlayers,gameNum){
-    return map.players[numPlayers][gameNum-1];
+    return map.players[numPlayers][(gameNum-1)];
 }
 
 
@@ -420,8 +420,26 @@ function isCougar(block, row, col){
 }
 //Load Hexagons on screen
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("btnAsk").style.display = 'none';
+    document.getElementById("btnSearch").style.display = 'none';
+    document.getElementById("btnYes").style.display = 'none';
+    document.getElementById("btnNo").style.display = 'none';
+    document.getElementById("getSelectedValueBtn").style.display = 'none';
+    document.getElementById("numberSelect").style.display = 'none';
+
+
+    const accordionHeader = document.querySelector('.accordion-header');
+    const accordionContent = document.querySelector('.accordion-content');
+
+    accordionHeader.addEventListener('click', () => {
+        // Toggle the display of the content section
+        accordionContent.style.display = accordionContent.style.display === 'block' ? 'none' : 'block';
+    });
+
+
+
     let advanced = sessionStorage.getItem("advanced");
-    let num_players = sessionStorage.getItem("numPlayers");
+    let num_players = 3;//sessionStorage.getItem("numPlayers");
     let map;
     if (advanced) {
         map = advanced_maps[Math.floor(Math.random() * advanced_maps.length)];
@@ -445,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i % 2 != 0) {
                 hex.classList.add('even');
             }
-            hex.id = k + ',' + i;
+           // hex.id = k + ',' + i;
             const left = document.createElement('header');
             left.className = 'left';
             left.classList.add(rearrangedBoard[k][i]);
@@ -562,47 +580,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.body.appendChild(cont);
 
+
     console.log(map);
     const gameConfig = get_game_config(map, num_players, game_num);
     console.log(gameConfig);
     const clues = get_clues(gameConfig);
+
+
+
     console.log(clues);
     const hint = get_hint(gameConfig);
-
-    //put here
-    const UClues = document.getElementById('clues');
-
-    // Loop through the clues array
-    for (let k = 0; k < clues.length; k++) {
-        // Create elements for accordion
-        const accordionItem = document.createElement('section');
-        accordionItem.classList.add('accordion-item');
-
-        // Create caption for accordion
-        const caption = document.createElement('section');
-        caption.classList.add('accordion-caption');
-        caption.textContent = `Player ${k + 1}`; // Caption text can be customized
-        accordionItem.appendChild(caption);
-
-        // Create content for accordion
-        const content = document.createElement('section');
-        content.classList.add('accordion-content');
-        content.textContent = clues[k]; // Set content text
-        accordionItem.appendChild(content);
-
-        // Append accordion item to UClues element
-        UClues.appendChild(accordionItem);
-    }
-
-    // Add event listener to each caption to toggle accordion content
-    const accordionCaptions = document.querySelectorAll('.accordion-caption');
-    accordionCaptions.forEach(caption => {
-        caption.addEventListener('click', function () {
-            const content = this.nextElementSibling;
-            content.classList.toggle('active');
-        });
-    });
-
 
     const newGameBtn = document.getElementById("newGameBtn");
     // const popupContainer = document.getElementById('popupContainer');
@@ -627,35 +614,11 @@ document.addEventListener('DOMContentLoaded', () => {
         popup_content.style.visibility = 'hidden';
     });
 
-    // Create hint accordion item
-    const hintAccordionItem = document.createElement('div');
-    hintAccordionItem.classList.add('accordion-item');
-
-    // Create caption for hint accordion
-    const hintCaption = document.createElement('div');
-    hintCaption.classList.add('accordion-caption');
-    hintCaption.classList.add('hint-caption'); // Add hint-caption class
-    hintCaption.textContent = 'Hint'; // Caption text for hint
-    hintAccordionItem.appendChild(hintCaption);
-
-    // Create content for hint accordion
-    const hintContent = document.createElement('div');
-    hintContent.classList.add('accordion-content');
-    hintContent.textContent = hint; // Set hint text
-    hintAccordionItem.appendChild(hintContent);
-
-    // Append hint accordion item to UClues element
-    UClues.appendChild(hintAccordionItem);
-
-    // Add event listener for the hint caption
-    hintCaption.addEventListener('click', function () {
-        const hintContent = this.nextElementSibling;
-        hintContent.classList.toggle('active');
-    });
 
 
 
-    startGame(num_players,clues);
+    //startGame(num_players,clues);
+    runGame(num_players,clues,hint);
 });
 
 
