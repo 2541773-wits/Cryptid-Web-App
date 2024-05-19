@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play game!</title>
+    <link rel="stylesheet" href="game1.css">
+    <script src="test/game.js"></script>
+    <!-- <script src="home-page-buttons.js"></script> -->
+</head>
+<body>
+    
+    <nav> 
+        <button class="newGameBtn" id="newGameBtn">New game</button>
+        <button class="recordBtn" onclick="window.open('record.html','_blank')" >Record Game session???</button>
+        <section id="clues"></section>
+        <section id = "instructions">Hello</section>
+    </nav>
+    <section class="popup-content" id="popup">
+        <h2>Start New Game</h2>
+        <p>Are you sure you want to start a new game?</p>
+        <button id="confirmButton">Yes</button>
+        <button id="cancelButton">No</button>
+    </section>
+
+    <main>
+        <table id="container">
+        </table>
+    </main>
+
+
+</body>
+</html>

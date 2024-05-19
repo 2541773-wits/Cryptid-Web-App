@@ -1,7 +1,113 @@
+body{
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    position: relative;
+    float: left;
+    width: 25%;
+    padding: 20px;
+    height: 100%;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding-top: 100px;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.popup-content{
+    width: 400px;
+    background-color: white;
+    border-radius: 6px;
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    visibility: hidden;
+    text-align: center;
+    padding: 0 30px 30px;
+    height: 330px;
+    color: black;
+    border: 2px solid black;
+    margin: center;
+    z-index: 1;
+    
+}
+
+.popup-content button {
+    width: 100%;
+    background: greenyellow;
+    padding: 10px 0;
+    margin-top: 25px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.popup-content h2 {
+    font-weight: 500;
+    font-size: 40px;
+    margin: 30px 0 10px;
+}
+
+.newGameBtn{
+    width: 55%;
+    height: 50px;
+    background-color: greenyellow;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.recordBtn{
+    width: 55%;
+    height: 70px;
+    background-color: greenyellow;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.instructions{
+    display: flex;
+}
+
+
+/* Style for the section containing clues */
+#clues {
+    background-color: #1e1e1e;
+    color: #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Style for the text inside the section */
+#clues::before {
+    content: "Clues";
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 .hex {
     float: left;
     margin-right: -13px;
     margin-bottom: -25px;
+    position: relative;
 }
 .hex .left {
     float: left;
@@ -10,6 +116,7 @@
     border-top: 26px solid transparent;
     border-bottom: 26px solid transparent;
 }
+
 .hex .middle {
     float: left;
     width: 30px;
@@ -35,6 +142,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 
 .hex .left.desert{
     float: left;
@@ -147,10 +255,6 @@
     align-items: center;
 }
 
-body{
-    display: flex;
-}
-
 /* Style for accordion items */
 .accordion-item {
     border: 2px solid #333;
@@ -192,77 +296,13 @@ body{
     display: flex;
 }
 
-
-/* Style for the section containing clues */
-#clues {
-    background-color: #1e1e1e;
-    color: #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 20px;
+.hex-dashed {
+    border: 2px dashed black; /* Adjust border width and color */
+    z-index: -1; /* Put inner hexagon behind the main one */
+    /* overflow: hidden; */
 }
 
-/* Style for the text inside the section */
-#clues::before {
-    content: "Clues";
-    display: block;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.hex-solid{
+    border: 2px solid red;
+    z-index: -1;
 }
-
-
-/* Style for the new game button */
-.new-game {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-.record{
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.new-game:hover {
-    background-color: #45a049;
-}
-
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-}
-
-.popup-content button {
-    margin-top: 10px;
-}
-
-

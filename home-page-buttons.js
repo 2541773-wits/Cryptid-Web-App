@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
     ];
     let currentMessageIndex = 0;
     const notificationMessage = document.getElementById("text-content");
-    notificationMessage.innerHTML = messages[currentMessageIndex];
+    notificationMessage.textContent = messages[currentMessageIndex];
 
     const nextBtn = document.getElementById("show");
     const prevBtn = document.getElementById("previous");
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function(){
         let advanced = switchElement.checked;
         sessionStorage.setItem("advanced", advanced);
         sessionStorage.setItem("numPlayers", numPlayers);
-        window.location.href = "game.html";
+        window.location.href = "game1.html";
     })
 
 
