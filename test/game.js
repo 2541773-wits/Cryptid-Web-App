@@ -92,7 +92,7 @@ function get_board_configuration(mapCode){
                 case 'A':
                     return 10;
                 case 'B':
-                    return 11;
+                    return 11;  
                 case 'C':
                     return 12;
             }
@@ -104,11 +104,7 @@ function get_board_configuration(mapCode){
 
     //Shift number back one - wrap around
     const sub1 = numbers.map(number=>{
-        if(number===1){
-            return 6
-        } else {
-            return number-1
-        }
+        return number -1;
     });
 
 
@@ -287,7 +283,116 @@ function board_layout(boardConfig){
 //console.log(board_layout([1,2,3,5,4,6]))
 
 
+function isBear(block, row, col){
+    if(block === 0){
+        if(row === 2 && col === 3){
+            return true;
+        }
+        else if(row === 2 && col === 4){
+            return true;
+        }
+        else if(row === 2 && col === 5){
+            return true;
+        }
+    }
+    
+    else if(block === 4){
+        if(row === 2 && col === 4){
+            return true;
+        }
+        else if(row === 1 && col === 5){
+            return true;
+        }
+        else if(row === 2 && col === 5){
+            return true;
+        }
+    }
 
+    else if(block === 5){
+        if(row === 0 && col === 0){
+            return true;
+        }
+        else if(row === 1 && col === 0){
+            return true;
+        }
+    }
+
+    else if(block === 6){
+        if(row === 0 && col === 0){return true;}
+        else if(row === 0 && col === 1){return true;}
+        else if(row === 0 && col === 2){return true;}
+    }
+
+    else if(block === 10){
+        if(row === 0 && col === 0){return true;}
+        else if(row === 0 && col === 1)return true;
+        else if(row === 1 && col === 0) return true;
+    }
+
+    else if(block === 11){
+        if(row === 1 && col === 5)return true;
+        else if(row === 2 && col === 5)return true;
+    }
+
+}
+
+function isCougar(block, row, col){
+    if(block === 1){
+        if(row === 0 && col === 0){
+            return true;
+        }
+        else if(row === 0 && col === 1){
+            return true;
+        }
+        else if(row === 0 && col === 2){
+            return true;
+        }
+    }
+
+    else if(block === 2){
+        if(row === 1 && col === 0){
+            return true;
+        }
+        else if(row === 1 && col === 1){
+            return true;
+        }
+        else if(row === 2 && col === 0){
+            return true;
+        }
+    }
+
+    else if(block === 3){
+        if(row === 1 && col === 5){
+            return true;
+        }
+        else if(row === 2 && col === 5){
+            return true;
+        }
+    }
+
+    else if(block === 7){
+        if(row === 2 && col === 3){
+            return true;
+        }
+        else if(row === 2 && col === 4){
+            return true;
+        }
+        else if(row === 2 && col === 5){
+            return true;
+        }
+    }
+
+    else if(block === 8){
+        if(row === 0 && col === 5){return true;}
+        else if(row === 1 && col === 4){return true;}
+        else if(row === 1 && col === 5){return true;}
+    }
+
+    else if(block === 9){
+        if(row === 0 && col === 0){return true;}
+        else if(row === 1 && col === 0){return true;}
+    }
+}
 //Load Hexagons on screen
 document.addEventListener('DOMContentLoaded', () => {
     let advanced = sessionStorage.getItem("advanced");
@@ -297,34 +402,89 @@ document.addEventListener('DOMContentLoaded', () => {
         map = advanced_maps[Math.floor(Math.random() * advanced_maps.length)];
     } else {
         map = intro_maps[Math.floor(Math.random() * intro_maps.length)];
-    }
+    }    
     const config = get_board_configuration(map.mapCode);
+    const rotation = config.rotations;
     const rearrangedBoard = board_layout(config);
     const towers = config.towers;
     const shacks = config.shacks;
+    console.log(config);
 
     const cont = document.getElementById('container');
 
     for (let k = 0; k < 9; k++) {
-        const hexRow = document.createElement('div');
-        hexRow.className = 'hex-row';
+        const hexRow = document.createElement('tr');
         for (let i = 0; i < 12; i++) {
-            const hex = document.createElement('div');
+            const hex = document.createElement('td');
             hex.className = 'hex';
             if (i % 2 != 0) {
                 hex.classList.add('even');
             }
-            const left = document.createElement('div');
+            const left = document.createElement('header');
             left.className = 'left';
             left.classList.add(rearrangedBoard[k][i]);
-            const middle = document.createElement('div');
+            const middle = document.createElement('main');
             middle.className = 'middle';
             middle.classList.add(rearrangedBoard[k][i]);
             middle.id = k + ',' + i;
-
-            const right = document.createElement('div');
+            const right = document.createElement('footer');
             right.className = 'right';
             right.classList.add(rearrangedBoard[k][i]);
+            // hex.classList.add('hex-inner');
+            if(k < 3 && i < 6){
+                
+                if(isBear(parseInt(rotation[0]), k, i)){
+                    hex.classList.add('hex-dashed');
+                }
+                if(isCougar(parseInt(rotation[0]), k, i)){
+                    hex.classList.add('hex-solid');
+                }
+            }
+            else if(k < 3 && i >= 6){
+                if(isBear(parseInt(rotation[1]), k, i - 6)){
+                    hex.classList.add('hex-dashed');
+                }
+                if(isCougar(parseInt(rotation[1]), k, i - 6)){
+                    hex.classList.add('hex-solid');
+                }
+            }
+            else if(k >= 3 && k < 6 && i < 6){
+                if(isBear(parseInt(rotation[2]), k -3, i)){
+                    hex.classList.add('hex-dashed');
+                }
+                if(isCougar(parseInt(rotation[1]), k, i - 6)){
+                    hex.classList.add('hex-solid');
+                }
+            }
+            else if(k >= 3 && k < 6 && i >6){
+                
+                if(isBear(parseInt(rotation[3]), k -3, i-6)){
+                    hex.classList.add('hex-dashed');
+                }
+                if(isCougar(parseInt(rotation[3]), k -3, i-6)){
+                    hex.classList.add('hex-solid');
+                }
+            }
+            else if(k >= 6 && i < 6){
+            
+                if(isBear(parseInt(rotation[4]), k - 6, i)){
+                    hex.classList.add('hex-dashed');
+                }
+                if(isCougar(parseInt(rotation[4]), k - 6, i)){
+                    hex.classList.add('hex-solid');
+                }
+            }
+            else if(k >= 6 && i > 6){
+                
+                if(isBear(parseInt(rotation[5]), k - 6, i - 6)){
+                    hex.classList.add('hex-dashed');
+                }
+                if(isCougar(parseInt(rotation[5]), k - 6, i - 6)){
+                    hex.classList.add('hex-solid');
+                }
+
+            }
+
             hex.appendChild(left);
             hex.appendChild(middle);
             hex.appendChild(right);
@@ -386,17 +546,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Loop through the clues array
     for (let k = 0; k < clues.length; k++) {
         // Create elements for accordion
-        const accordionItem = document.createElement('div');
+        const accordionItem = document.createElement('section');
         accordionItem.classList.add('accordion-item');
 
         // Create caption for accordion
-        const caption = document.createElement('div');
+        const caption = document.createElement('section');
         caption.classList.add('accordion-caption');
         caption.textContent = `Player ${k + 1}`; // Caption text can be customized
         accordionItem.appendChild(caption);
 
         // Create content for accordion
-        const content = document.createElement('div');
+        const content = document.createElement('section');
         content.classList.add('accordion-content');
         content.textContent = clues[k]; // Set content text
         accordionItem.appendChild(content);
@@ -415,23 +575,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    const newGameButton = document.querySelector('.new-game');
-    const popupContainer = document.getElementById('popupContainer');
+    const newGameBtn = document.getElementById("newGameBtn");
+    // const popupContainer = document.getElementById('popupContainer');
+    const popup_content = document.getElementById("popup");
     const confirmButton = document.getElementById('confirmButton');
     const cancelButton = document.getElementById('cancelButton');
 
-    newGameButton.addEventListener('click', function () {
-        popupContainer.style.display = 'block';
+
+
+    newGameBtn.addEventListener('click', function() {
+        popup_content.style.visibility = 'visible';
+        console.log("Hi");
     });
 
     confirmButton.addEventListener('click', function () {
         console.log('Starting new game...');
         location.reload();
-        popupContainer.style.display = 'none'; // Close the popup
+        // popup_content.style.visibility = 'hidden'; // Close the popup
     });
 
     cancelButton.addEventListener('click', function () {
-        popupContainer.style.display = 'none'; // Close the popup
+        popup_content.style.visibility = 'hidden';
     });
 
     // Create hint accordion item
@@ -721,6 +885,7 @@ function choosePlayer(playerAsking) {
         })
 
     });
+
 }
 
 
