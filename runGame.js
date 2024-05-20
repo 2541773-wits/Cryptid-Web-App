@@ -424,7 +424,7 @@ async function runGame(numPlayers,clues,hint){
        // document.getElementById("btnSearch").style.display = 'none';
     };//while
     console.log(gameRecord.toJSON());
-    gameRecord.saveJSON(gameRecord.toJSON,"idk");
+    gameRecord.saveJSON(gameRecord.toJSON,"gameFile");
 }
 
 
