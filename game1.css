@@ -10,14 +10,14 @@ nav {
     float: left;
     width: 25%;
     padding: 20px;
-    height: auto;
+    height: auto; /* Change to auto for flexible height */
     border: 2px solid black;
     border-radius: 4px;
     padding-top: 100px;
     margin-left: 1%;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
 }
 
 .popup-content {
@@ -32,7 +32,7 @@ nav {
     visibility: hidden;
     text-align: center;
     padding: 0 30px 30px;
-    height: auto;
+    height: auto; /* Flexible height */
     color: black;
     border: 2px solid black;
     z-index: 1;
@@ -72,7 +72,7 @@ nav {
 
 .instructions {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack vertically for small screens */
 }
 
 /* Style for the section containing clues */
@@ -128,14 +128,9 @@ nav {
 }
 
 .hex-container {
-    max-width: 100%;
-    overflow-x: auto; /* Allow horizontal scrolling */
+    max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 .hex .left.desert {
@@ -289,12 +284,13 @@ nav {
 
 .instructions {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack vertically for small screens */
 }
 
 .hex-dashed {
-    border: 2px dashed black;
-    z-index: -1;
+    border: 2px dashed black; /* Adjust border width and color */
+    z-index: -1; /* Put inner hexagon behind the main one */
+    /* overflow: hidden; */
 }
 
 .hex-solid {
@@ -307,7 +303,7 @@ nav {
     float: left;
     width: 25%;
     padding: 20px;
-    height: auto;
+    height: auto; /* Change to auto for flexible height */
     border: 2px solid black;
     border-radius: 4px;
     padding-top: 100px;
@@ -315,7 +311,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
 }
 
 /* Info section styles */
@@ -323,7 +319,7 @@ nav {
     margin: 20px auto;
     max-width: 600px;
     padding: 20px;
-    background-color: #fff;
+    background-color: #fff; /* White */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -333,7 +329,7 @@ nav {
 
 /* Accordion styles */
 .accordion-item {
-    background-color: #1976d2;
+    background-color: #1976d2; /* Blue */
     border-radius: 10px;
     margin-bottom: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -349,15 +345,15 @@ nav {
 .accordion-content {
     padding: 10px;
     display: none;
-    background-color: #000;
-    color: white;
+    background-color: #000; /* Black */
+    color: white; /* White text */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 /* Button styles */
 button {
-    background-color: #4caf50;
+    background-color: #4caf50; /* Green */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -367,14 +363,14 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #45a049; /* Dark green */
 }
 
 /* Select styles */
 select {
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* Light grey */
     margin-right: 10px;
 }
 
@@ -400,7 +396,6 @@ p {
     .hex-container {
         width: 100%;
         overflow-x: auto;
-        flex-wrap: nowrap;
     }
 
     .instructions {
@@ -419,48 +414,5 @@ p {
     button, .newGameBtn, .recordBtn {
         width: 100%;
         max-width: none;
-    }
-
-    .hex-container {
-        width: 100%;
-        overflow-x: scroll;
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-    }
-
-    .hex {
-        margin-right: 0;
-        margin-bottom: 0;
-    }
-}
-
-@media (orientation: portrait) {
-    .hex-container {
-        width: 100%;
-        overflow-x: scroll;
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-    }
-
-    .hex {
-        margin-right: 0;
-        margin-bottom: 0;
-    }
-}
-
-@media (orientation: landscape) {
-    .hex-container {
-        width: 100%;
-        overflow-x: visible;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .hex {
-        margin-right: -13px;
-        margin-bottom: -25px;
     }
 }
