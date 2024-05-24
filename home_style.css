@@ -1,18 +1,18 @@
-body{
+body {
     margin: 0 auto;
     padding: 0;
     width: 100%;
     font-family: Arial, sans-serif;
 }
 
-header{
+header {
     background-color: black;
     color: white;
     padding: 10px;
     text-align: center;
 }
 
-nav{
+nav {
     position: relative;
     float: left;
     width: 30%;
@@ -28,17 +28,15 @@ nav{
     background-repeat: no-repeat;
 }
 
-
 nav ul {
     list-style-type: none;
     padding-top: 60px;
     margin: 0;
     position: absolute;
-    /* size: 10px; */
     left: 0;
 }
 
-nav ul li{
+nav ul li {
     padding-top: 35px;
     font-size: 30px;
     cursor: pointer;
@@ -50,8 +48,7 @@ a {
     font-weight: 500;
 }
 
-
-nav ul li label{
+nav ul li label {
     color: white;
     text-decoration: none;
     font-weight: 500;
@@ -61,39 +58,34 @@ a:hover {
     text-decoration: underline;
 }
 
-main{
+main {
     position: relative;
     display: flex;
     flex-direction: column;
-    /* float: right; */
     width: 60%;
     margin: 10px auto 0;
-
-    /* align-items: stretch; */
     border: none;
 }
 
-section{
+section {
     background-color: white;
     margin-bottom: 20px;
     padding-bottom: 20px;
     border: 2px solid black;
 }
 
-section h1{
+section h1 {
     color: black;
     width: 100%;
     margin: 0;
     font-family: 'Courier New', Courier, monospace;
 }
 
-section p{
+section p {
     padding: 10px;
-
 }
 
-.buttonShow{
-    /* position: relative; */
+.buttonShow {
     margin-right: 20px;
     float: right;
     width: 90px;
@@ -102,10 +94,9 @@ section p{
     border: none;
     font-size: 18px;
     cursor: pointer;
-
 }
 
-.buttonClosed{
+.buttonClosed {
     border: none;
     float: right;
     width: 20px;
@@ -115,7 +106,7 @@ section p{
     cursor: pointer;
 }
 
-.prevBtn{
+.prevBtn {
     margin-left: 20px;
     width: 90px;
     height: 40px;
@@ -126,7 +117,7 @@ section p{
     cursor: pointer;
 }
 
-.drop-down{
+.drop-down {
     width: 100%;
     border: 2px solid greenyellow;
     height: 40px;
@@ -135,16 +126,16 @@ section p{
     cursor: pointer;
 }
 
-select option{
+select option {
     font-size: medium;
 }
 
-section h3{
+section h3 {
     margin-top: 20px;
     margin-bottom: 0;
 }
 
-.startBtn{
+.startBtn {
     width: 100%;
     height: 40px;
     background-color: aquamarine;
@@ -154,28 +145,26 @@ section h3{
     cursor: pointer;
 }
 
-.switch{
+.switch {
     width: 50px;
     height: 18px;
     cursor: pointer;
 }
 
-.advance{
+.advance {
     width: 50%;
     background-color: white;
     border-radius: 6px;
     position: absolute;
     top: 25%;
     left: 25%;
-    /* transform: translate(-50%, -50%) scale(0);
-    transition: top .4s; */
     visibility: hidden;
     padding: 0 30px 30px;
     height: 40%;
     color: black;
 }
 
-ion-icon{
+ion-icon {
     color: green;
     font-size: 30px;
 }
@@ -185,15 +174,69 @@ ion-icon{
     background-color: white;
     cursor: pointer;
     position: relative;
-    vertical-align: middle; /* Add this line */
-    margin-left: 5px; /* Add this line for spacing */
+    vertical-align: middle;
+    margin-left: 5px;
 }
 
-.noExplain{
+.noExplain {
     border: 2px solid black;
     float: right;
     width: 100px;
     background-color: white;
     font-size: 15px;
     cursor: pointer;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    nav, main {
+        width: 100%;
+        float: none;
+        height: auto;
+    }
+
+    nav {
+        padding-top: 20px;
+        background-size: cover;
+    }
+
+    nav ul {
+        position: relative;
+        padding-top: 20px;
+    }
+
+    nav ul li {
+        font-size: 24px;
+        padding-top: 20px;
+    }
+
+    .buttonShow, .prevBtn {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li {
+        font-size: 18px;
+        padding-top: 15px;
+    }
+
+    section h1 {
+        font-size: 24px;
+    }
+
+    section p {
+        font-size: 14px;
+    }
+
+    .buttonShow, .prevBtn {
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .startBtn {
+        height: 35px;
+        font-size: 16px;
+    }
 }
