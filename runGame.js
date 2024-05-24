@@ -1,23 +1,3 @@
-// script.js
-/*
-document.addEventListener('DOMContentLoaded', () => {
-    const accordionHeader = document.querySelector('.accordion-header');
-    const accordionContent = document.querySelector('.accordion-content');
-
-    accordionHeader.addEventListener('click', () => {
-        // Toggle the display of the content section
-        accordionContent.style.display = accordionContent.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.getElementById("btnAsk").style.display = 'none';
-    document.getElementById("btnSearch").style.display = 'none';
-    document.getElementById("btnYes").style.display = 'none';
-    document.getElementById("btnNo").style.display = 'none';
-    document.getElementById("getSelectedValueBtn").style.display = 'none';
-    
-});
-*/
-
 class game{
     constructor(numPlayers,clues,hint){
         this.numPlayers = numPlayers;
@@ -47,7 +27,6 @@ class game{
         }
     }//nextPlayer()
 
-
     changePlayer(player){
         this.prevPlayer = this.currPlayer;
         this.currPlayer = player-1;
@@ -61,11 +40,7 @@ class game{
         else{
             this.prevPlayer = this.currPlayer-1;
         }
-    }
-
-    
-
-    
+    }    
 }
 
 class boardInfo {
@@ -213,8 +188,6 @@ class boardInfo {
         });
     }
     
-    
-
     async handleInitialClicks() {
         const info = document.getElementById("instructions");
         const divContainer = document.getElementById("container");
@@ -250,7 +223,6 @@ class boardInfo {
         accordionContent.innerHTML = this.gameInstance.clues[player];
         accordionContent.style.display = 'none';
     }
-
 
     populateSelect(){
         const selectElement = document.getElementById('numberSelect');
@@ -349,7 +321,6 @@ class boardInfo {
         return allYes;  // Return the result
     }
     
-
     placeDisc(player,space){
         this.gameInstance.playerDiscs[player].add(space);
         const hex = document.getElementById(space);
@@ -387,18 +358,16 @@ class boardInfo {
                 hex.appendChild(cube);
             }
     }
-    
 }
 
 
 
 async function runGame(numPlayers,clues,hint){
     const gameRecord = new GameRecord();
-
     const currGame = new game(numPlayers,clues,hint);
     const board = new boardInfo(currGame,gameRecord);
+    
     let over = false;
-    document.getElementById('numberSelect').style.display='none';
     const info = document.getElementById("instructions");
     await board.handleInitialClicks();
 
@@ -409,26 +378,18 @@ async function runGame(numPlayers,clues,hint){
         info.innerHTML = "Would you like to ask a question or search?"
         const result = await board.optionBtnListener();
         if (result){
-            info.innerHTML = "Winner!"
-            console.log("winner")
+            info.innerHTML = "Player " + (currGame.getCurrPlayer()+1) + " is the winner!";
             over=true;
         }
         else{
             currGame.nextPlayer();
             board.nextClue(currGame.getCurrPlayer());
-            console.log("continue");
         }
-        console.log("over!")
-        //over = true;
-        //document.getElementById("btnAsk").style.display = 'none';
-       // document.getElementById("btnSearch").style.display = 'none';
     };//while
-    console.log(gameRecord.toJSON());
-    gameRecord.saveJSON(gameRecord.toJSON,"idk");
+    
+    
+    gameRecord.saveJSON(gameRecord.toJSON(),"idk");
 }
-
-
-//runGame(3,["1","2","3"],"hello");
 
 class PlayerMove {
     constructor(player, action, location) {
@@ -454,22 +415,22 @@ class GameRecord {
 
     saveJSON(jsonData,filename){
         // Create a Blob from the JSON data
-    const blob = new Blob([jsonData], { type: 'application/json' });
+        const blob = new Blob([jsonData], { type: 'application/json' });
 
-    // Create a temporary URL for the Blob
-    const url = URL.createObjectURL(blob);
+        // Create a temporary URL for the Blob
+        const url = URL.createObjectURL(blob);
 
-    // Create a link element
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
+        // Create a link element
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
 
-    // Append the link to the document body and trigger a click event to start the download
-    document.body.appendChild(a);
-    a.click();
+        // Append the link to the document body and trigger a click event to start the download
+        document.body.appendChild(a);
+        a.click();
 
-    // Clean up by removing the link and revoking the URL
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+        // Clean up by removing the link and revoking the URL
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 }
