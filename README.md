@@ -8,5 +8,9 @@ Cryptid is a unique deduction game of honest misdirection in which players must 
 2541773 – James Stanton  
 2556677 – Jarren Downward
 
+## Publicly Hosted Application
+## Project Demo
+## Documents
+## Scrum Methodology
 
 [![codecov](https://codecov.io/gh/2541773-wits/Cryptid-Web-App/graph/badge.svg?token=DSV58DJPZM)](https://codecov.io/gh/2541773-wits/Cryptid-Web-App)
