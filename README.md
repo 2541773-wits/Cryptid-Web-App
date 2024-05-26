@@ -10,7 +10,7 @@ Cryptid is a unique deduction game of honest misdirection in which players must 
 
 ## Publicly Hosted Application
 Here is the link to the publicly accessible web application:
-[Crptid Web App](https://happy-sand-063963b03.5.azurestaticapps.net/)
+[Cryptid Web App](https://happy-sand-063963b03.5.azurestaticapps.net/)
 ## Project Demo
 Here is the link to the project demo:
 ## Documents and meetings
