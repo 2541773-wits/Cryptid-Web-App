@@ -1,1 +1,1 @@
-Here you will find a documentation guideline to help you through the navigation process of this documentation structure. This guideline also contains a summary of what we did throughout the project and provides links to access certain documentation if needed.
+All UML diagrams can be found in the [UML Diagrams]([UML Diagrams](https://github.com/2541773-wits/Cryptid-Web-App/blob/e7229fe7328568354bbfe0c74e9052bc5d19cdb6/Documentation/All%20UML%20Diagrams)) folder.
