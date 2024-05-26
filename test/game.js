@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hintBtn.addEventListener('click',()=>{
         document.getElementById('yesButton').style.display = 'block';
         document.getElementById('confirmButton').style.display = 'none';
-        const header = document.getElementById('popup-header').innerText = "Reveal hint";
+        document.getElementById('popup-header').innerText = "Reveal hint";
         const content = document.getElementById('popup-content');
         content.innerText = "All players must agree to reveal hint. Do all players agree?";
 
@@ -629,7 +629,6 @@ document.addEventListener('DOMContentLoaded', () => {
         //console.log("hello")
         confirmButton.addEventListener('click',()=>{
             confirmButton.style.display = 'none';
-            header.innerText ="Hint";
             content.innerText = hint;
             document.getElementById('hint').textContent=hint;
             document.getElementById('hint').style.display='block';
