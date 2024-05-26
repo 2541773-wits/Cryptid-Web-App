@@ -1,1 +1,0 @@
-This is where you will find a guideline to help you navigate through the documentation. This file also consists of a summary of what we did throughout our project, and has certain links that can be accesed if need be.
