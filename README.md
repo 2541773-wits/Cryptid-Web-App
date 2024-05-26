@@ -14,8 +14,8 @@ Here is the link to the publicly accessible web application:
 ## Project Demo
 Here is the link to the project demo:
 ## Documents and meetings
-All documents and meeting notes can be found in the Documents folder on the repository:
-[Meeting notes](Documentation/Scrum Meetings/)
+All documents and meeting notes can be found in the documentation folder here: 
+[Documentation](Documentation)
 ## Scrum Methodology
 Here is the link to the Taiga project plan:
 [Taiga project](https://tree.taiga.io/project/2541773-cryptid-web-app/timeline)
