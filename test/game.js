@@ -149,12 +149,9 @@ function get_board_configuration(mapCode){
     return boardConfig;
 }
 
-
 function get_game_config(map,numPlayers,gameNum){
     return map.players[numPlayers][(gameNum-1)];
 }
-
-
 
 function get_destination(gameConfigs){
     return gameConfigs.destination.split(',').map(Number);
@@ -279,8 +276,6 @@ function mergeMatricesByRows(matrix1, matrix2) {
     return mergedMatrix;
 }
 
-
-
 function board_layout(boardConfig){
     const order = boardConfig.tiles;
     const rotation = boardConfig.rotations;
@@ -304,9 +299,6 @@ function board_layout(boardConfig){
     
     return rearrangedBoard;
 }
-
-//console.log(board_layout([1,2,3,5,4,6]))
-
 
 function isBear(block, row, col){
     if(block === 0){
@@ -604,291 +596,37 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Hi");
     });
 
-    confirmButton.addEventListener('click', function () {
-        console.log('Starting new game...');
-        location.reload();
-        // popup_content.style.visibility = 'hidden'; // Close the popup
-    });
+  //  confirmButton.addEventListener('click', function () {
+  //      console.log('Starting new game...');
+  //      location.reload();
+  //      // popup_content.style.visibility = 'hidden'; // Close the popup
+   // });
 
     cancelButton.addEventListener('click', function () {
         popup_content.style.visibility = 'hidden';
     });
 
+    const hintBtn = document.getElementById('hintBtn');
+    hintBtn.addEventListener('click',()=>{
+        const header = document.getElementById('popup-header').innerText = "Reveal hint";
+        const content = document.getElementById('popup-content').innerText = "All players must agree to reveal hint. Do all players agree?";
 
+        const popup_content = document.getElementById("popup");
+        const confirmButton = document.getElementById('confirmButton');
+        const cancelButton = document.getElementById('cancelButton');
+        console.log("hello")
+        confirmButton.addEventListener('click',()=>{
+            header.innerText ="Hint";
+            content.innerText = hint;
+        })
+        console.log("hello again")
+        popup_content.style.visibility = 'visible';
+    })
 
 
     //startGame(num_players,clues);
     runGame(num_players,clues,hint);
 });
-
-
-function updateClueDisplay(currentPlayer) {
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    accordionItems.forEach((item, index) => {
-        if (index === currentPlayer) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
-
-/*
-function startGame(numPlayers, clues) {
-    let currentPlayer = 0; // Variable to keep track of the current player
-    let currentRound = 0; // Variable to keep track of the current round
-    const instructions = document.getElementById("instructions");
-    const board = document.getElementById("container");
-    const UClues = document.getElementById('clues');
-
-    // Function to handle click event for each player
-    function handleClickForPlayer(event) {
-        if (event.target.classList.contains('middle')) {
-            const hex = document.getElementById(event.target.id);
-    
-            // Add image on block
-            let cube = document.createElement('img');
-            cube.src = "img/cube.png"
-            hex.appendChild(cube);
-    
-            // Update instructions for the next player
-            currentPlayer++;
-            if (currentPlayer >= numPlayers) {
-                currentPlayer = 0; // Reset currentPlayer when all players have played
-                currentRound++;
-            }
-    
-            if (currentRound < 2) {
-                instructions.textContent = "Player " + (currentPlayer + 1) + " look at your clue and place your cube";
-            } else {
-
-                instructions.textContent = "All players have placed their cubes twice.";
-                playGame(numPlayers);
-                
-            }
-    
-            // If all players have played twice, remove the event listener
-            if (currentRound >= 2) {
-                board.removeEventListener('click', handleClickForPlayer);
-            }
-    
-            // Update clue display
-            updateClueDisplay(currentPlayer);
-        }
-    }
-    
-
-    // Function to add event listener for each player with a delay
-    function addEventListenerForPlayerWithDelay(player) {
-        setTimeout(function() {
-            instructions.textContent = "Player " + (player + 1) + " look at your clue and place your cube";
-            board.addEventListener('click', handleClickForPlayer);
-        }, (player * numPlayers + currentRound) * 1000); // Delay each player by 1 second multiplied by the number of players and the current round
-    }
-
-    for (let k = 0; k < numPlayers * 2; k++) {
-        addEventListenerForPlayerWithDelay(k % numPlayers); // Use modulo to cycle through players
-    }
-
-    // Function to update the display of clues based on the current player
-    
-    
-    
-
-    // Loop through the clues array
-    for (let k = 0; k < clues.length; k++) {
-        // Create elements for accordion
-        const accordionItem = document.createElement('div');
-        accordionItem.classList.add('accordion-item');
-
-        // Create caption for accordion
-        const caption = document.createElement('div');
-        caption.classList.add('accordion-caption');
-        caption.textContent = `Player ${k + 1}`; // Caption text can be customized
-        accordionItem.appendChild(caption);
-
-        // Create content for accordion
-        const content = document.createElement('div');
-        content.classList.add('accordion-content');
-        content.textContent = clues[k]; // Set content text
-        accordionItem.appendChild(content);
-
-        // Append accordion item to UClues element
-        UClues.appendChild(accordionItem);
-    }
-
-    // Initial update of clue display
-    updateClueDisplay(currentPlayer);
-}
-*/
-function displayPlayerOptions(player) {
-    // Create a container for the buttons
-    const optionsContainer = document.createElement('div');
-    optionsContainer.classList.add('player-options');
-
-    const instructions = document.getElementById('instructions');
-    instructions.textContent = "Player " + (player+1) + "'s turn"
-    // Create buttons for asking a question and searching an area
-    const askQuestionButton = document.createElement('button');
-    askQuestionButton.textContent = 'Ask a Question';
-    askQuestionButton.addEventListener('click', () => {
-        // Implement the logic for asking a question
-        askQuestion(player);
-
-        console.log(`Player ${player} chose to ask a question.`);
-    });
-
-    const searchAreaButton = document.createElement('button');
-    searchAreaButton.textContent = 'Search an Area';
-    searchAreaButton.addEventListener('click', () => {
-        // Implement the logic for searching an area
-        console.log(`Player ${player} chose to search an area.`);
-    });
-
-    // Append buttons to the container
-    optionsContainer.appendChild(askQuestionButton);
-    optionsContainer.appendChild(searchAreaButton);
-
-    // Find the instructions element and append the container to it
-    //const instructions = document.getElementById('instructions');
-    instructions.appendChild(optionsContainer);
-}
-
-
-// Example usage:
-// Call this function when it's a player's turn, passing the player number
-// For example, if it's player 1's turn, call displayPlayerOptions(1);
-
-function playGame(numPlayers){
-    let game = true;
-    let currentPlayer = 0;
-    let currentRound = 0;
-    
-    while(game){
-        displayPlayerOptions(currentPlayer);
-        currentPlayer++;
-            if (currentPlayer >= numPlayers) {
-                currentPlayer = 0; // Reset currentPlayer when all players have played
-                currentRound++;
-            }
-        game = false;
-        
-    }
-}
-
-
-function askQuestion(playerAsking) {
-    const instructions = document.getElementById('instructions');
-    const board = document.getElementById('container');
-
-    // Display initial instruction to choose a tile
-    instructions.textContent = 'Player ' + (playerAsking + 1) + ' choose a tile to ask';
-
-    // Function to handle tile selection
-    function handleTileSelection(event) {
-        if (event.target.classList.contains('middle')) {
-            const hex = document.getElementById(event.target.id);
-            const img = document.createElement('img');
-            img.id = "temp"
-            img.src = "img/star.png";
-            hex.appendChild(img);
-
-            // Remove event listener to prevent further tile selections
-            board.removeEventListener('click', handleTileSelection);
-
-            // Proceed to choose player after a delay
-            setTimeout(() => {
-                choosePlayer(playerAsking);
-            }, 1500); // Adjust the delay as needed
-        }
-    }
-
-    // Add event listener to the board for tile selection
-    board.addEventListener('click', handleTileSelection);
-    setTimeout(() => {
-        board.removeEventListener('click', handleTileSelection);
-    }, 1500);
-}
-
-// Function to prompt the player to choose a player after selecting a tile
-function choosePlayer(playerAsking) {
-    const instructions = document.getElementById('instructions');
-    const board = document.getElementById('container');
-    // Display instruction to choose a player
-    instructions.textContent = 'Player ' + (playerAsking + 1) + ' choose a player to ask';
-
-    // Create input and button for choosing player
-    const input = document.createElement('input');
-    input.type = "number";
-    input.placeholder = "1";
-    const button = document.createElement('button');
-    button.textContent = 'Submit';
-    instructions.appendChild(input);
-    instructions.appendChild(button);
-
-    // Add event listener to the button for submitting player choice
-    button.addEventListener('click', () => {
-        updateClueDisplay(parseInt(input.value-1));
-        const selectedPlayer = parseInt(input.value);
-        // Handle the selected player as needed
-        instructions.textContent = "Player  " + selectedPlayer + " choose to put a cube or disc on the tile. ";
-
-        const btnCube = document.createElement('button');
-        const btnDisc = document.createElement('button');
-        btnCube.textContent = "Cube";
-        btnDisc.textContent = "Disc";
-
-        instructions.appendChild(btnCube);
-        instructions.appendChild(btnDisc);
-
-        const img = document.getElementById("temp");
-        btnCube.addEventListener('click',()=>{
-            img.src = "img/cube.png"
-
-            instructions.textContent = 'Player ' + (playerAsking + 1) + ' choose where to place your cube';
-            // Function to handle tile selection
-            function handleTileSelection(event) {
-                if (event.target.classList.contains('middle')) {
-                    const hex = document.getElementById(event.target.id);
-                    const img = document.createElement('img');
-                    img.id = "temp"
-                    img.src = "img/cube.png";
-                    hex.appendChild(img);
-
-                    // Remove event listener to prevent further tile selections
-                    board.removeEventListener('click', handleTileSelection);
-
-                    // Proceed to choose player after a delay
-                    setTimeout(() => {
-                        choosePlayer(playerAsking);
-                    }, 1000); // Adjust the delay as needed
-                }
-            }
-
-            // Add event listener to the board for tile selection
-            board.addEventListener('click', handleTileSelection);
-
-            //next turn
-            displayPlayerOptions(playerAsking + 1);
-        });
-
-        btnDisc.addEventListener('click',()=>{
-            img.src = "img/disc.png"
-            //next turn
-
-            displayPlayerOptions(playerAsking + 1);
-        })
-
-    });
-
-}
-
-
-
-
-
-
-
 
 module.exports = {
     get_game_config: get_game_config,
