@@ -12,7 +12,11 @@ Cryptid is a unique deduction game of honest misdirection in which players must 
 Here is the link to the publicly accessible web application:
 [Crptid Web App](https://happy-sand-063963b03.5.azurestaticapps.net/)
 ## Project Demo
-## Documents
+Here is the link to the project demo:
+## Documents and meetings
+All documents and meeting notes can be found in the Documents folder on the repository
 ## Scrum Methodology
+Here is the link to the Taiga project plan:
+[Taiga project](https://tree.taiga.io/project/2541773-cryptid-web-app/timeline)
 
 [![codecov](https://codecov.io/gh/2541773-wits/Cryptid-Web-App/graph/badge.svg?token=DSV58DJPZM)](https://codecov.io/gh/2541773-wits/Cryptid-Web-App)
