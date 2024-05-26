@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
     const messages = [
-        `<p>First time playing? Press "Next" to get started</p>` + 
-        `<p>Press x to close the tutorial. You can turn it back on in "Settings".</p>`,
+        `First time playing? Press "Next" to get started` + 
+        `Press x to close the tutorial. You can turn it back on in "Settings".`,
         "<p>Cryptid is a deduction boardgame for 3-5 players, which uses this site to generate scenarios and show clues to the players.</p>" +
         "<p>First thing, if you haven't already, have someone read the rules.</p>" + 
         "<p>Next, have each player take one of the bags of coloured pieces.</p>",
