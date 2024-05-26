@@ -417,3 +417,10 @@ class GameRecord {
         URL.revokeObjectURL(url);
     }
 }
+
+module.exports = {
+    game: game,
+    boardInfo: boardInfo,
+    PlayerMove: boardInfo,
+    GameRecord: GameRecord,
+};

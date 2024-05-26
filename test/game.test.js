@@ -205,71 +205,123 @@ describe('board_layout', () => {
 });
 
 
-describe('isBear', () => {
-    test('returns true for bear at block 0, row 2, col 3', () => {
+
+describe('isBear function', () => {
+    test('should return true for valid combinations', () => {
+        // Test cases for block 0
         expect(gameTest.isBear(0, 2, 3)).toBe(true);
-    });
-
-    test('returns true for bear at block 0, row 2, col 4', () => {
         expect(gameTest.isBear(0, 2, 4)).toBe(true);
-    });
-
-    test('returns true for bear at block 0, row 2, col 5', () => {
         expect(gameTest.isBear(0, 2, 5)).toBe(true);
-    });
-
-    test('returns true for bear at block 4, row 2, col 4', () => {
+        
+        // Test cases for block 4
         expect(gameTest.isBear(4, 2, 4)).toBe(true);
-    });
-
-    test('returns true for bear at block 4, row 1, col 5', () => {
         expect(gameTest.isBear(4, 1, 5)).toBe(true);
-    });
-
-    test('returns true for bear at block 4, row 2, col 5', () => {
         expect(gameTest.isBear(4, 2, 5)).toBe(true);
+        
+        // Test cases for block 5
+        expect(gameTest.isBear(5, 0, 0)).toBe(true);
+        expect(gameTest.isBear(5, 1, 0)).toBe(true);
+        
+        // Test cases for block 6
+        expect(gameTest.isBear(6, 0, 0)).toBe(true);
+        expect(gameTest.isBear(6, 0, 1)).toBe(true);
+        expect(gameTest.isBear(6, 0, 2)).toBe(true);
+        
+        // Test cases for block 10
+        expect(gameTest.isBear(10, 0, 0)).toBe(true);
+        expect(gameTest.isBear(10, 0, 1)).toBe(true);
+        expect(gameTest.isBear(10, 1, 0)).toBe(true);
+        
+        // Test cases for block 11
+        expect(gameTest.isBear(11, 1, 5)).toBe(true);
+        expect(gameTest.isBear(11, 2, 5)).toBe(true);
     });
 
-    test('returns false for other positions', () => {
+    test('should return false for invalid combinations', () => {
+        // Test cases for block 0
         expect(gameTest.isBear(0, 0, 0)).toBe(false);
         expect(gameTest.isBear(0, 1, 1)).toBe(false);
-        expect(gameTest.isBear(0, 2, 2)).toBe(false);
-        // Add more negative test cases
+        
+        // Test cases for block 4
+        expect(gameTest.isBear(4, 0, 0)).toBe(false);
+        expect(gameTest.isBear(4, 1, 1)).toBe(false);
+        
+        // Test cases for block 5
+        expect(gameTest.isBear(5, 0, 1)).toBe(false);
+        expect(gameTest.isBear(5, 1, 1)).toBe(false);
+        
+        // Test cases for block 6
+        expect(gameTest.isBear(6, 1, 0)).toBe(false);
+        expect(gameTest.isBear(6, 2, 1)).toBe(false);
+        
+        // Test cases for block 10
+        expect(gameTest.isBear(10, 1, 1)).toBe(false);
+        expect(gameTest.isBear(10, 2, 2)).toBe(false);
+        
+        // Test cases for block 11
+        expect(gameTest.isBear(11, 0, 0)).toBe(false);
+        expect(gameTest.isBear(11, 1, 1)).toBe(false);
     });
 });
 
-describe('isCougar', () => {
-    test('returns true for cougar at block 1, row 0, col 0', () => {
+describe('isCougar function', () => {
+    test('should return true for valid combinations', () => {
+        // Test cases for block 1
         expect(gameTest.isCougar(1, 0, 0)).toBe(true);
-    });
-
-    test('returns true for cougar at block 1, row 0, col 1', () => {
         expect(gameTest.isCougar(1, 0, 1)).toBe(true);
-    });
-
-    test('returns true for cougar at block 1, row 0, col 2', () => {
         expect(gameTest.isCougar(1, 0, 2)).toBe(true);
-    });
-
-    test('returns true for cougar at block 2, row 1, col 0', () => {
+        
+        // Test cases for block 2
         expect(gameTest.isCougar(2, 1, 0)).toBe(true);
-    });
-
-    test('returns true for cougar at block 2, row 1, col 1', () => {
         expect(gameTest.isCougar(2, 1, 1)).toBe(true);
-    });
-
-    test('returns true for cougar at block 2, row 2, col 0', () => {
         expect(gameTest.isCougar(2, 2, 0)).toBe(true);
+        
+        // Test cases for block 3
+        expect(gameTest.isCougar(3, 1, 5)).toBe(true);
+        expect(gameTest.isCougar(3, 2, 5)).toBe(true);
+        
+        // Test cases for block 7
+        expect(gameTest.isCougar(7, 2, 3)).toBe(true);
+        expect(gameTest.isCougar(7, 2, 4)).toBe(true);
+        expect(gameTest.isCougar(7, 2, 5)).toBe(true);
+        
+        // Test cases for block 8
+        expect(gameTest.isCougar(8, 0, 5)).toBe(true);
+        expect(gameTest.isCougar(8, 1, 4)).toBe(true);
+        expect(gameTest.isCougar(8, 1, 5)).toBe(true);
+        
+        // Test cases for block 9
+        expect(gameTest.isCougar(9, 0, 0)).toBe(true);
+        expect(gameTest.isCougar(9, 1, 0)).toBe(true);
     });
 
-    test('returns false for other positions', () => {
-        expect(gameTest.isCougar(1, 1, 1)).toBe(false);
+    test('should return false for invalid combinations', () => {
+        // Test cases for block 1
         expect(gameTest.isCougar(1, 2, 2)).toBe(false);
+        expect(gameTest.isCougar(1, 1, 1)).toBe(false);
+        
+        // Test cases for block 2
         expect(gameTest.isCougar(2, 0, 0)).toBe(false);
-        // Add more negative test cases
+        expect(gameTest.isCougar(2, 2, 1)).toBe(false);
+        
+        // Test cases for block 3
+        expect(gameTest.isCougar(3, 0, 0)).toBe(false);
+        expect(gameTest.isCougar(3, 1, 1)).toBe(false);
+        
+        // Test cases for block 7
+        expect(gameTest.isCougar(7, 1, 2)).toBe(false);
+        expect(gameTest.isCougar(7, 2, 1)).toBe(false);
+        
+        // Test cases for block 8
+        expect(gameTest.isCougar(8, 0, 0)).toBe(false);
+        expect(gameTest.isCougar(8, 2, 2)).toBe(false);
+        
+        // Test cases for block 9
+        expect(gameTest.isCougar(9, 2, 1)).toBe(false);
+        expect(gameTest.isCougar(9, 2, 2)).toBe(false);
     });
 });
+
 
 
 

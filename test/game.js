@@ -318,6 +318,7 @@ function isBear(block, row, col){
         else if(row === 2 && col === 5){
             return true;
         }
+        else{return false;}
     }
     
     else if(block === 4){
@@ -330,6 +331,7 @@ function isBear(block, row, col){
         else if(row === 2 && col === 5){
             return true;
         }
+        else{return false;}
     }
 
     else if(block === 5){
@@ -339,24 +341,30 @@ function isBear(block, row, col){
         else if(row === 1 && col === 0){
             return true;
         }
+        else{return false;}
     }
 
     else if(block === 6){
         if(row === 0 && col === 0){return true;}
         else if(row === 0 && col === 1){return true;}
         else if(row === 0 && col === 2){return true;}
+        else{return false;}
     }
 
     else if(block === 10){
         if(row === 0 && col === 0){return true;}
         else if(row === 0 && col === 1)return true;
         else if(row === 1 && col === 0) return true;
+        else{return false;}
+
     }
 
     else if(block === 11){
         if(row === 1 && col === 5)return true;
         else if(row === 2 && col === 5)return true;
+        else{return false;}
     }
+    else{return false;}
 
 }
 
@@ -371,6 +379,7 @@ function isCougar(block, row, col){
         else if(row === 0 && col === 2){
             return true;
         }
+        else{return false;}
     }
 
     else if(block === 2){
@@ -383,6 +392,7 @@ function isCougar(block, row, col){
         else if(row === 2 && col === 0){
             return true;
         }
+        else{return false;}
     }
 
     else if(block === 3){
@@ -392,6 +402,7 @@ function isCougar(block, row, col){
         else if(row === 2 && col === 5){
             return true;
         }
+        else{return false;}
     }
 
     else if(block === 7){
@@ -404,18 +415,22 @@ function isCougar(block, row, col){
         else if(row === 2 && col === 5){
             return true;
         }
+        else{return false;}
     }
 
     else if(block === 8){
         if(row === 0 && col === 5){return true;}
         else if(row === 1 && col === 4){return true;}
         else if(row === 1 && col === 5){return true;}
+        else{return false;}
     }
 
     else if(block === 9){
         if(row === 0 && col === 0){return true;}
         else if(row === 1 && col === 0){return true;}
+        else{return false;}
     }
+    else{return false;}
 }
 //Load Hexagons on screen
 document.addEventListener('DOMContentLoaded', () => {
@@ -649,4 +664,9 @@ module.exports = {
     get_clues: get_clues,
     get_hint: get_hint,
     getSubmatrix: getSubmatrix,
+    rotate: rotate,
+    mergeMatricesByRows: mergeMatricesByRows,
+    board_layout: board_layout,
+    isBear: isBear,
+    isCougar: isCougar,
 };
