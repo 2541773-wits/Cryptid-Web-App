@@ -8,14 +8,17 @@ class game{
         this.hint = hint;
     }
 
+    //Get the number of players
     getNumPlayers(){
         return this.numPlayers
     }
 
+    //Get the current player
     getCurrPlayer(){
         return this.currPlayer;
     }
 
+    //Move to next player
     nextPlayer(){
         if (this.currPlayer<this.numPlayers-1){
             this.currPlayer++;
@@ -25,6 +28,7 @@ class game{
         }
     }//nextPlayer()
 
+    //Change the current player
     changePlayer(player){
         this.currPlayer = player;
     }//changePlayer(player)
@@ -37,6 +41,7 @@ class boardInfo {
         this.recordInstance = recordInstance;
     }
 
+    //Listen for option button clicks (Ask/Searchs)
     optionBtnListener() {
         const btnIds = ["btnAsk", "btnSearch"];
         return new Promise((resolve, reject) => {
@@ -63,7 +68,7 @@ class boardInfo {
         });
     }
     
-    
+    //Listen for player selection to ask a question
     getPlayerToAsk() {
         return new Promise((resolve, reject) => {
             const getSelectedValueBtn = document.getElementById('getSelectedValueBtn'); // Define getSelectedValueBtn first
@@ -78,6 +83,7 @@ class boardInfo {
         });
     }
     
+    //Listen for yes/no button clicks
     yesNoButtonListener() {
         const buttonIds = ["btnYes","btnNo"];
         return new Promise((resolve) => {
@@ -94,14 +100,18 @@ class boardInfo {
         });
     }
 
+    //Ask a question
     async askQuestion() {
+        //Hide buttons
         document.getElementById("btnAsk").style.display = 'none';
         document.getElementById("btnSearch").style.display = 'none';
 
+        //Update instructions
         const info = document.getElementById("instructions");
         info.innerHTML = "Choose a tile";
         let clickedDivId = await this.tileListener();
         
+        //Place pawn on the selected tile
         this.placePawn(clickedDivId);
         info.innerHTML ="Choose a player to ask";
         document.getElementById("getSelectedValueBtn").style.display = 'block';
@@ -110,14 +120,18 @@ class boardInfo {
         selectElement.style.display='inline';
 
         try{
+            //Get the current player and player to ask
             const currentPlayer = this.gameInstance.getCurrPlayer();
             const player = await this.getPlayerToAsk();
+            //Record the move
             this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Asked player "+player,clickedDivId);
+            //Change to other player
             this.gameInstance.changePlayer(player-1);
             this.nextClue(this.gameInstance.getCurrPlayer());
             selectElement.style.display='none';
             document.getElementById("getSelectedValueBtn").style.display = 'none';
 
+            //Update instructions
             info.innerHTML = "Can the monster be here according to your clue? Choose below."
             document.getElementById("btnYes").style.display = 'block';
             document.getElementById("btnNo").style.display = 'block';
@@ -127,13 +141,13 @@ class boardInfo {
             document.getElementById("btnNo").style.display = 'none';
             
             if(clickedButtonId==="btnYes"){
-                //this.placeDisc(this.gameInstance.getCurrPlayer(),clickedDivId);
+                //Record move and change player
                 this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered yes",clickedDivId);
                 document.getElementById(clickedDivId).childNodes[0].src ="img/disc.png";
                 this.gameInstance.changePlayer(currentPlayer);
             }
             else{
-                //put cube on board
+                //Record move, change player, and place cube
                 this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered no",clickedDivId);
                 this.gameInstance.changePlayer(currentPlayer);
                 document.getElementById(clickedDivId).childNodes[0].src ="img/disc.png";
@@ -153,7 +167,7 @@ class boardInfo {
         return Promise.resolve();
     }
 
-
+    //Listen for tile clicks
     tileListener() {
         return new Promise((resolve, reject) => {
             const divContainer = document.getElementById("container");
@@ -173,6 +187,7 @@ class boardInfo {
         });
     }
     
+    //Handle initial clicks to place cubes
     async handleInitialClicks() {
         const info = document.getElementById("instructions");
         const divContainer = document.getElementById("container");
@@ -187,10 +202,8 @@ class boardInfo {
                 if (div.querySelector('img')===null){
                     this.placeCube(this.gameInstance.getCurrPlayer(),clickedDivId);
                 }
-                //div? div.querySelector('img')===null: this.placeCube(this.gameInstance.getCurrPlayer(),clickedDivId);
                 
                 //change accordion content
-                console.log("Clicked on div with ID:", clickedDivId);
                 this.gameInstance.nextPlayer();
                 divContainer.removeEventListener("click", this.tileListener);
             } catch (error) {
@@ -198,9 +211,9 @@ class boardInfo {
             }
         }
         this.nextClue(this.gameInstance.getCurrPlayer());
-        console.log(this.gameInstance.playerCubes);
     }
 
+    //Show next player's clue
     nextClue(player){
         const accordionHeader = document.querySelector('.accordion-header');
         const accordionContent = document.querySelector('.accordion-content');
@@ -209,6 +222,7 @@ class boardInfo {
         accordionContent.style.display = 'none';
     }
 
+    //Who can be asked a question
     populateSelect(){
         const selectElement = document.getElementById('numberSelect');
 
@@ -232,6 +246,7 @@ class boardInfo {
         return !this.gameInstance.playerDiscs[player].has(space);
     }
 
+    //Handle events when a search is declared
     async handleSearchClicks() {
         const originalSearcher = this.gameInstance.getCurrPlayer();
         let allYes = true;
@@ -243,15 +258,12 @@ class boardInfo {
         info.innerHTML = "Choose a tile for your search";
     
         try {
-            console.log(originalSearcher);
             let searchSpace = await this.tileListener();
-            console.log("chose")
             this.recordInstance.recordMove(originalSearcher, "Chose to search", searchSpace);
             this.placePawn(searchSpace);
     
             // Move to the next player and provide the next clue
             this.gameInstance.nextPlayer();
-            console.log(this.gameInstance.getCurrPlayer());
             this.nextClue(this.gameInstance.getCurrPlayer());
     
             while (originalSearcher !== this.gameInstance.getCurrPlayer()) {
@@ -271,7 +283,6 @@ class boardInfo {
                     document.getElementById("btnNo").style.display = 'none';
     
                     if (clickedButtonId === "btnYes") {
-                        console.log("yes");
                         this.recordInstance.recordMove(currentPlayer, "Answered yes to search", searchSpace);
                         document.getElementById(searchSpace).childNodes[0].src = "img/disc.png";
                         this.placeDisc(currentPlayer, searchSpace);
@@ -287,7 +298,6 @@ class boardInfo {
                     }
     
                     this.gameInstance.nextPlayer();
-                    console.log(this.gameInstance.getCurrPlayer());
                 } catch (error) {
                     console.error("Error during player response:", error);
                     break;
@@ -312,9 +322,7 @@ class boardInfo {
             disc.src = "img/disc.png"
             hex.appendChild(disc);
         }
-            // Add image on block
             
-        //add disc to board
     }
 
     placeCube(player,space){
@@ -337,6 +345,7 @@ class boardInfo {
     }
 }
 
+//Run the actual game
 async function runGame(numPlayers,clues,hint){
     const gameRecord = new GameRecord();
     const currGame = new game(numPlayers,clues,hint);
