@@ -1,28 +1,43 @@
+/* Hexagon styling */
 .hex {
     float: left;
     margin-right: -13px;
     margin-bottom: -25px;
 }
-.hex .left {
+.hex .left,
+.hex .middle,
+.hex .right {
     float: left;
+}
+.hex .left,
+.hex .right {
     width: 0;
-    border-right: 15px solid #6C6;
     border-top: 26px solid transparent;
     border-bottom: 26px solid transparent;
 }
+.hex .left {
+    border-right: 15px solid #6C6;
+}
+.hex .right {
+    border-left: 15px solid #6C6;
+}
 .hex .middle {
-    float: left;
     width: 30px;
     height: 52px;
     background: #6C6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.hex .right {
-    float: left;
-    width: 0;
-    border-left: 15px solid #6C6;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
+
+/* Hexagon container */
+.hex-container {
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+/* Hexagon row styling */
 .hex-row {
     clear: left;
 }
@@ -30,136 +45,40 @@
     margin-top: 26.5px;
 }
 
-.hex-container{
-    max-width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hex .left.desert{
-    float: left;
-    width: 0;
-    border-right: 15px solid yellow;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .right.desert {
-    float: left;
-    width: 0;
-    border-left: 15px solid yellow;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .middle.desert {
-    float: left;
-    width: 30px;
-    height: 52px;
+/* Terrain colors */
+.hex .left.desert, .hex .right.desert, .hex .middle.desert {
     background: yellow;
+    border-color: yellow;
 }
-
-.hex .left.forest{
-    float: left;
-    width: 0;
-    border-right: 15px solid green;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .right.forest {
-    float: left;
-    width: 0;
-    border-left: 15px solid green;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .middle.forest {
-    float: left;
-    width: 30px;
-    height: 52px;
+.hex .left.forest, .hex .right.forest, .hex .middle.forest {
     background: green;
+    border-color: green;
 }
-
-.hex .left.water{
-    float: left;
-    width: 0;
-    border-right: 15px solid blue;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .right.water {
-    float: left;
-    width: 0;
-    border-left: 15px solid blue;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .middle.water {
-    float: left;
-    width: 30px;
-    height: 52px;
+.hex .left.water, .hex .right.water, .hex .middle.water {
     background: blue;
+    border-color: blue;
 }
-
-.hex .left.swamp{
-    float: left;
-    width: 0;
-    border-right: 15px solid purple;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .right.swamp {
-    float: left;
-    width: 0;
-    border-left: 15px solid purple;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .middle.swamp {
-    float: left;
-    width: 30px;
-    height: 52px;
+.hex .left.swamp, .hex .right.swamp, .hex .middle.swamp {
     background: purple;
+    border-color: purple;
 }
-
-.hex .left.mountain{
-    float: left;
-    width: 0;
-    border-right: 15px solid grey;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .right.mountain {
-    float: left;
-    width: 0;
-    border-left: 15px solid grey;
-    border-top: 26px solid transparent;
-    border-bottom: 26px solid transparent;
-}
-.hex .middle.mountain {
-    float: left;
-    width: 30px;
-    height: 52px;
+.hex .left.mountain, .hex .right.mountain, .hex .middle.mountain {
     background: grey;
+    border-color: grey;
 }
 
-.middle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-body{
+/* Body styling */
+body {
     display: flex;
 }
 
-/* Style for accordion items */
+/* Accordion styling */
 .accordion-item {
     border: 2px solid #333;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #1e1e1e;
 }
-
-/* Style for accordion captions */
 .accordion-caption {
     background-color: #333;
     padding: 15px;
@@ -169,12 +88,9 @@ body{
     color: #fff;
     transition: background-color 0.3s ease;
 }
-
 .accordion-caption:hover {
     background-color: #555;
 }
-
-/* Style for accordion content */
 .accordion-content {
     display: none;
     padding: 15px;
@@ -182,18 +98,16 @@ body{
     background-color: #2b2b2b;
     color: #ccc;
 }
-
-/* Style for active accordion content */
 .accordion-content.active {
     display: block;
 }
 
-.instructions{
+/* Instructions styling */
+.instructions {
     display: flex;
 }
 
-
-/* Style for the section containing clues */
+/* Clues section styling */
 #clues {
     background-color: #1e1e1e;
     color: #ccc;
@@ -201,8 +115,6 @@ body{
     border-radius: 5px;
     margin-top: 20px;
 }
-
-/* Style for the text inside the section */
 #clues::before {
     content: "Clues";
     display: block;
@@ -211,9 +123,8 @@ body{
     margin-bottom: 10px;
 }
 
-
-/* Style for the new game button */
-.new-game {
+/* Buttons styling */
+.new-game, .record {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -223,22 +134,11 @@ body{
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
-.record{
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
 .new-game:hover {
     background-color: #45a049;
 }
 
-
+/* Popup styling */
 .popup {
     display: none;
     position: fixed;
@@ -249,7 +149,6 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
-
 .popup-content {
     background-color: white;
     padding: 20px;
@@ -260,9 +159,6 @@ body{
     transform: translate(-50%, -50%);
     width: 300px;
 }
-
 .popup-content button {
     margin-top: 10px;
 }
-
-
