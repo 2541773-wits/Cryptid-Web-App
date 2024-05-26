@@ -79,8 +79,9 @@ let board = [
     ["desert", "desert", "water", "water", "water", "water", "mountain", "water", "water", "water", "water", "forest"]
 ];
 
+//Function to get board configuration from map code
 function get_board_configuration(mapCode){
-    //Get tile characters
+    //Convert map code to string and get the first 6 characters
     mapCode = String(mapCode);
     const board = String(mapCode).slice(0,6);
 
@@ -148,14 +149,18 @@ function get_board_configuration(mapCode){
     return boardConfig;
 }
 
+//Function to get game configuration
 function get_game_config(map,numPlayers,gameNum){
     return map.players[numPlayers][(gameNum-1)];
 }
 
+
+//FUnction to get destination from game configurations
 function get_destination(gameConfigs){
     return gameConfigs.destination.split(',').map(Number);
 }
 
+//Function to get clues from game configurations
 function get_clues(gameConfigs){
     const dict = {
         "water_or_desert": "The habitat is on water or desert",
@@ -207,10 +212,10 @@ function get_clues(gameConfigs){
         "not_within_blue": "The habitat is not within three spaces of a blue structure",
         "not_within_black": "The habitat is not within three spaces of a black structure"
     }
-    
     return gameConfigs.rules.map(rule => dict[rule] || rule);
 }
 
+//Function to get hint from game configurations
 function get_hint(gameConfigs){
     dict = {
         "hint_not_1": "There are no within 1 clues",
@@ -225,7 +230,6 @@ function get_hint(gameConfigs){
         "hint_not_2": "There are no within 2 clues",
         "hint_not_3": "There are no within 3 clues"
     };
-    console.log(dict[gameConfigs.hint]);
     return dict[gameConfigs.hint]
 }
 
@@ -251,6 +255,7 @@ const matrices = [
     getSubmatrix(6, 8, 6, 11)
 ];
 
+//Function to rotate board piece
 function rotate(boardPiece){
     // Swap first and last rows
     let temp = boardPiece[0];
@@ -263,6 +268,7 @@ function rotate(boardPiece){
     return boardPiece;
 }
 
+//FUnction to join board pieces
 function mergeMatricesByRows(matrix1, matrix2) {
     if (matrix1.length !== matrix2.length) {
         throw new Error("Matrices must have the same number of rows.");
@@ -276,6 +282,7 @@ function mergeMatricesByRows(matrix1, matrix2) {
     return mergedMatrix;
 }
 
+//Function to get board layout from board configuration
 function board_layout(boardConfig){
     const order = boardConfig.tiles;
     const rotation = boardConfig.rotations;
@@ -412,6 +419,7 @@ function isCougar(block, row, col){
 }
 //Load Hexagons on screen
 document.addEventListener('DOMContentLoaded', () => {
+    //Hide elements on page load
     document.getElementById("btnAsk").style.display = 'none';
     document.getElementById("btnSearch").style.display = 'none';
     document.getElementById("btnYes").style.display = 'none';
@@ -420,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("numberSelect").style.display = 'none';
     document.getElementById("hint").style.display = 'none';
 
-
+    //Event listeners for accordion
     const accordionHeader = document.querySelector('.accordion-header');
     const accordionContent = document.querySelector('.accordion-content');
 
@@ -430,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-
+    //Retrieve data from sessionStorage
     let advanced = sessionStorage.getItem("advanced");
     let num_players = sessionStorage.getItem("numPlayers");
     let map;
@@ -439,15 +447,16 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         map = intro_maps[Math.floor(Math.random() * intro_maps.length)];
     }    
+
+    //Get board configuration and related data
     const config = get_board_configuration(map.mapCode);
     const rotation = config.rotations;
     const rearrangedBoard = board_layout(config);
     const towers = config.towers;
     const shacks = config.shacks;
-    console.log(config);
 
+    //Create hexagon board
     const cont = document.getElementById('container');
-
     for (let k = 0; k < 9; k++) {
         const hexRow = document.createElement('tr');
         for (let i = 0; i < 12; i++) {
@@ -573,25 +582,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.body.appendChild(cont);
 
-
-    console.log(map);
+    //Get game configuration, clues, and hint
     const gameConfig = get_game_config(map, num_players, game_num);
-    console.log(gameConfig);
     const clues = get_clues(gameConfig);
-
-
-
-    console.log(clues);
     const hint = get_hint(gameConfig);
-    console.log(hint);
+
+    //Event listeners for new game
     const newGameBtn = document.getElementById("newGameBtn");
-    // const popupContainer = document.getElementById('popupContainer');
     const popup_content = document.getElementById("popup");
     const confirmButton = document.getElementById('confirmButton');
     const cancelButton = document.getElementById('cancelButton');
-
-
-
     newGameBtn.addEventListener('click', function() {
         document.getElementById('popup-header').textContent = 'Start New Game';
         document.getElementById('popup-content').textContent = 'Are yo sure you want to start a new game?';
@@ -599,13 +599,12 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmButton.style.display = 'block';
         popup_content.style.visibility = 'visible';
         document.getElementById('yesButton').style.display = 'none';
-       // console.log("Hi");
     });
 
+    //Confirm button to start new game
     confirmButton.addEventListener('click', function () {
         console.log('Starting new game...');
         location.reload();
-        // popup_content.style.visibility = 'hidden'; // Close the popup
     });
 
     //Close popup
@@ -626,7 +625,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const confirmButton = document.getElementById('yesButton');
         const cancelButton = document.getElementById('cancelButton');
         cancelButton.textContent = 'Close';
-        //console.log("hello")
         confirmButton.addEventListener('click',()=>{
             confirmButton.style.display = 'none';
             content.innerText = hint;
@@ -634,15 +632,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('hint').style.display='block';
             hintBtn.style.display = 'none';
         });
-        //console.log("hello again")
+
         popup_content.style.visibility = 'visible';
     })
 
 
-    //startGame(num_players,clues);
+    //Run the game
     runGame(num_players,clues,hint);
 });
 
+//Export for testing
 module.exports = {
     get_game_config: get_game_config,
     get_board_configuration: get_board_configuration,
