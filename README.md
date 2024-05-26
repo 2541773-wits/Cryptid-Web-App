@@ -6,7 +6,7 @@ Cryptid is a unique deduction game of honest misdirection in which players must 
 2446659 – Ru’aan Maharaj  
 2578078 – Herry Ye  
 2541773 – James Stanton  
-2556677 – Jarren Downward
+2601486 – Jarren Downward
 
 ## Publicly Hosted Application
 Here is the link to the publicly accessible web application:
