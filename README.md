@@ -13,7 +13,7 @@ Here is the link to the publicly accessible web application:
 [Cryptid Web App](https://happy-sand-063963b03.5.azurestaticapps.net/)
 ## Project Demo
 Here is the link to the project demo:
-[Cryptid Web App Demo]([https://youtu.be/nb1NaSNgcY4])
+[Cryptid Web App Demo](https://youtu.be/nb1NaSNgcY4)
 ## Documents and meetings
 All documents and meeting notes can be found in the documentation folder here: 
 [Documentation](Documentation)
