@@ -416,3 +416,10 @@ p {
         max-width: none;
     }
 }
+
+#hint{
+    background-color: #8B0000; /* DarkRed */
+    color: #FFFFFF; /* White text for contrast */
+    padding: 20px;
+    border-radius: 5px;
+}

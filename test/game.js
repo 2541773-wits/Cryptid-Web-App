@@ -1,5 +1,4 @@
 let game_num = 3;
-//let num_players = 4;
 
 intro_maps =[
     {"mapCode": "1A8B9C54336A656870", "mode": "intro", "key": "intro_1A8B9C54336A656870", "players": {"3": [{"destination": "2, 9", "rules": ["within_active_fissure", "within_desert", "water_or_bone"], "hint": "hint_not_3"}, {"destination": "4, 6", "rules": ["within_active_fissure", "desert_or_bone", "within_water"], "hint": "hint_not_3"}, {"destination": "5, 9", "rules": ["water_or_bone", "within_desert", "within_fissure"], "hint": "hint_not_3"}, {"destination": "5, 10", "rules": ["within_colony", "desert_or_mountain", "forest_or_desert"], "hint": "hint_not_1"}], "4": [{"destination": "2, 3", "rules": ["water_or_forest", "within_desert", "water_or_mountain", "within_bone"], "hint": "hint_not_3"}, {"destination": "2, 4", "rules": ["within_forest", "within_pyramid", "water_or_desert", "within_water"], "hint": "hint_not_3"}, {"destination": "3, 5", "rules": ["within_fissure", "desert_or_bone", "desert_or_mountain", "within_active_fissure"], "hint": "hint_not_3"}, {"destination": "3, 6", "rules": ["within_pyramid", "within_active_fissure", "within_water", "within_desert"], "hint": "hint_not_on_on"}, {"destination": "4, 6", "rules": ["within_fissure", "desert_or_bone", "within_red", "within_water"], "hint": "hint_not_2"}, {"destination": "4, 7", "rules": ["water_or_bone", "water_or_desert", "within_fissure", "within_bone"], "hint": "hint_not_3"}, {"destination": "5, 9", "rules": ["within_water", "within_fissure", "water_or_forest", "within_blue"], "hint": "hint_not_2"}, {"destination": "5, 10", "rules": ["forest_or_desert", "within_colony", "within_pyramid", "within_desert"], "hint": "hint_not_3"}, {"destination": "6, 2", "rules": ["within_desert", "within_colony", "within_forest", "within_red"], "hint": "hint_not_on_on"}, {"destination": "6, 3", "rules": ["forest_or_bone", "within_blue", "within_fissure", "within_desert"], "hint": "hint_not_2"}, {"destination": "6, 9", "rules": ["within_colony", "within_desert", "within_red", "desert_or_mountain"], "hint": "hint_water"}, {"destination": "7, 3", "rules": ["within_water", "within_fissure", "within_forest", "within_blue"], "hint": "hint_not_on_on"}, {"destination": "7, 8", "rules": ["within_bone", "within_blue", "water_or_bone", "within_active_fissure"], "hint": "hint_desert"}, {"destination": "7, 9", "rules": ["within_red", "water_or_desert", "water_or_forest", "within_pyramid"], "hint": "hint_not_1"}, {"destination": "8, 9", "rules": ["within_blue", "within_forest", "water_or_bone", "within_pyramid"], "hint": "hint_mountain"}, {"destination": "8, 11", "rules": ["within_pyramid", "within_colony", "within_desert", "within_fissure"], "hint": "hint_not_on_on"}, {"destination": "9, 11", "rules": ["within_blue", "within_fissure", "within_pyramid", "water_or_desert"], "hint": "hint_bone"}], "5": [{"destination": "2, 4", "rules": ["within_desert", "within_forest", "within_water", "desert_or_mountain", "within_pyramid"], "hint": "hint_not_3"}, {"destination": "3, 6", "rules": ["within_red", "water_or_forest", "within_water", "within_dormant_fissure", "within_desert"], "hint": "hint_mountain"}, {"destination": "4, 6", "rules": ["within_water", "within_bone", "within_fissure", "desert_or_bone", "within_forest"], "hint": "hint_not_3"}, {"destination": "4, 7", "rules": ["within_water", "water_or_desert", "within_active_fissure", "within_red", "within_dormant_fissure"], "hint": "hint_bone"}, {"destination": "5, 2", "rules": ["within_desert", "desert_or_mountain", "within_forest", "within_pyramid", "within_blue"], "hint": "hint_fissure"}, {"destination": "6, 2", "rules": ["within_desert", "within_red", "water_or_forest", "within_blue", "within_water"], "hint": "hint_not_2"}, {"destination": "6, 3", "rules": ["water_or_forest", "within_blue", "forest_or_mountain", "within_desert", "within_fissure"], "hint": "hint_not_2"}, {"destination": "6, 9", "rules": ["within_water", "within_pyramid", "within_desert", "within_red", "within_blue"], "hint": "hint_not_on_on"}, {"destination": "7, 3", "rules": ["within_water", "mountain_or_bone", "forest_or_mountain", "within_pyramid", "within_forest"], "hint": "hint_not_3"}, {"destination": "7, 7", "rules": ["within_water", "water_or_forest", "forest_or_bone", "within_pyramid", "within_colony"], "hint": "hint_not_3"}, {"destination": "8, 8", "rules": ["forest_or_bone", "within_blue", "water_or_forest", "within_bone", "within_water"], "hint": "hint_not_2"}, {"destination": "8, 9", "rules": ["within_forest", "within_pyramid", "forest_or_bone", "mountain_or_bone", "within_blue"], "hint": "hint_water"}, {"destination": "8, 11", "rules": ["within_dormant_fissure", "within_blue", "within_colony", "within_bone", "within_fissure"], "hint": "hint_not_on_on"}, {"destination": "9, 11", "rules": ["desert_or_mountain", "within_fissure", "forest_or_desert", "within_bone", "within_blue"], "hint": "hint_not_2"}], "2": [{"destination": "2, 4", "rules": ["within_forest", "within_pyramid", "water_or_desert", "within_water"], "hint": "hint_not_3"}, {"destination": "3, 5", "rules": ["within_fissure", "desert_or_bone", "desert_or_mountain", "within_active_fissure"], "hint": "hint_not_3"}, {"destination": "3, 6", "rules": ["within_pyramid", "within_active_fissure", "within_water", "within_desert"], "hint": "hint_not_3"}, {"destination": "4, 6", "rules": ["within_fissure", "desert_or_bone", "within_red", "within_water"], "hint": "hint_not_2"}, {"destination": "4, 7", "rules": ["water_or_bone", "water_or_desert", "within_fissure", "within_bone"], "hint": "hint_not_2"}, {"destination": "5, 9", "rules": ["within_water", "within_fissure", "water_or_forest", "within_blue"], "hint": "hint_not_2"}, {"destination": "5, 10", "rules": ["forest_or_desert", "within_colony", "within_pyramid", "within_desert"], "hint": "hint_not_3"}, {"destination": "6, 2", "rules": ["within_desert", "within_colony", "within_forest", "within_red"], "hint": "hint_not_on_on"}, {"destination": "6, 9", "rules": ["within_colony", "within_desert", "within_red", "desert_or_mountain"], "hint": "hint_forest"}, {"destination": "7, 3", "rules": ["within_water", "within_fissure", "within_forest", "within_blue"], "hint": "hint_not_on_on"}, {"destination": "7, 8", "rules": ["within_bone", "within_blue", "water_or_bone", "within_active_fissure"], "hint": "hint_desert"}, {"destination": "8, 9", "rules": ["within_blue", "within_forest", "water_or_bone", "within_pyramid"], "hint": "hint_mountain"}, {"destination": "8, 11", "rules": ["within_pyramid", "within_colony", "within_desert", "within_fissure"], "hint": "hint_not_on_on"}]}}
@@ -226,6 +225,7 @@ function get_hint(gameConfigs){
         "hint_not_2": "There are no within 2 clues",
         "hint_not_3": "There are no within 3 clues"
     };
+    console.log(dict[gameConfigs.hint]);
     return dict[gameConfigs.hint]
 }
 
@@ -418,6 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("btnNo").style.display = 'none';
     document.getElementById("getSelectedValueBtn").style.display = 'none';
     document.getElementById("numberSelect").style.display = 'none';
+    document.getElementById("hint").style.display = 'none';
 
 
     const accordionHeader = document.querySelector('.accordion-header');
@@ -582,7 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log(clues);
     const hint = get_hint(gameConfig);
-
+    console.log(hint);
     const newGameBtn = document.getElementById("newGameBtn");
     // const popupContainer = document.getElementById('popupContainer');
     const popup_content = document.getElementById("popup");
@@ -592,34 +593,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     newGameBtn.addEventListener('click', function() {
+        document.getElementById('popup-header').textContent = 'Start New Game';
+        document.getElementById('popup-content').textContent = 'Are yo sure you want to start a new game?';
+        document.getElementById('yesButton').style.display ='none';
+        confirmButton.style.display = 'block';
         popup_content.style.visibility = 'visible';
-        console.log("Hi");
+        document.getElementById('yesButton').style.display = 'none';
+       // console.log("Hi");
     });
 
-  //  confirmButton.addEventListener('click', function () {
-  //      console.log('Starting new game...');
-  //      location.reload();
-  //      // popup_content.style.visibility = 'hidden'; // Close the popup
-   // });
+    confirmButton.addEventListener('click', function () {
+        console.log('Starting new game...');
+        location.reload();
+        // popup_content.style.visibility = 'hidden'; // Close the popup
+    });
 
+    //Close popup
     cancelButton.addEventListener('click', function () {
         popup_content.style.visibility = 'hidden';
     });
 
+    //Reveal hint
     const hintBtn = document.getElementById('hintBtn');
     hintBtn.addEventListener('click',()=>{
+        document.getElementById('yesButton').style.display = 'block';
+        document.getElementById('confirmButton').style.display = 'none';
         const header = document.getElementById('popup-header').innerText = "Reveal hint";
-        const content = document.getElementById('popup-content').innerText = "All players must agree to reveal hint. Do all players agree?";
+        const content = document.getElementById('popup-content');
+        content.innerText = "All players must agree to reveal hint. Do all players agree?";
 
         const popup_content = document.getElementById("popup");
-        const confirmButton = document.getElementById('confirmButton');
+        const confirmButton = document.getElementById('yesButton');
         const cancelButton = document.getElementById('cancelButton');
-        console.log("hello")
+        cancelButton.textContent = 'Close';
+        //console.log("hello")
         confirmButton.addEventListener('click',()=>{
+            confirmButton.style.display = 'none';
             header.innerText ="Hint";
             content.innerText = hint;
-        })
-        console.log("hello again")
+            document.getElementById('hint').textContent=hint;
+            document.getElementById('hint').style.display='block';
+            hintBtn.style.display = 'none';
+        });
+        //console.log("hello again")
         popup_content.style.visibility = 'visible';
     })
 
