@@ -9,6 +9,8 @@ Cryptid is a unique deduction game of honest misdirection in which players must 
 2556677 – Jarren Downward
 
 ## Publicly Hosted Application
+Here is the link to the publicly accessible web application:
+[Crptid Web App](https://happy-sand-063963b03.5.azurestaticapps.net/)
 ## Project Demo
 ## Documents
 ## Scrum Methodology
