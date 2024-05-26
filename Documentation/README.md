@@ -1,1 +1,1 @@
-All UML diagrams can be found in the [UML Diagrams]([UML Diagrams](https://github.com/2541773-wits/Cryptid-Web-App/blob/e7229fe7328568354bbfe0c74e9052bc5d19cdb6/Documentation/All%20UML%20Diagrams)) folder.
+All UML diagrams can be found in the ([UML Diagrams](https://github.com/2541773-wits/Cryptid-Web-App/blob/e7229fe7328568354bbfe0c74e9052bc5d19cdb6/Documentation/All%20UML%20Diagrams)) folder.
