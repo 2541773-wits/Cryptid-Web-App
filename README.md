@@ -20,4 +20,4 @@ All documents and meeting notes can be found in the documentation folder here:
 Here is the link to the Taiga project plan:
 [Taiga project](https://tree.taiga.io/project/2541773-cryptid-web-app/timeline)
 
-[![codecov](https://codecov.io/gh/2541773-wits/Cryptid-Web-App/graph/badge.svg?token=DSV58DJPZM)](https://codecov.io/gh/2541773-wits/Cryptid-Web-App)
+[![codecov](https://codecov.io/gh/2541773-wits/Cryptid-Web-App/branch/main/graph/badge.svg?token=DSV58DJPZM)](https://codecov.io/gh/2541773-wits/Cryptid-Web-App)
