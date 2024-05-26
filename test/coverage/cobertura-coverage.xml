@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="579" lines-covered="253" line-rate="0.43689999999999996" branches-valid="289" branches-covered="182" branch-rate="0.6297" timestamp="1716733394854" complexity="0" version="0.1">
+<coverage lines-valid="579" lines-covered="253" line-rate="0.43689999999999996" branches-valid="289" branches-covered="182" branch-rate="0.6297" timestamp="1716735218553" complexity="0" version="0.1">
   <sources>
     <source>C:\Code\Cryptid-Web-App\test</source>
   </sources>
