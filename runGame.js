@@ -2,7 +2,6 @@ class game{
     constructor(numPlayers,clues,hint){
         this.numPlayers = numPlayers;
         this.currPlayer = 0;
-        this.prevPlayer=0;
         this.playerDiscs = Array.from({ length: this.numPlayers }, () => new Set()); // To track player discs on the board
         this.playerCubes = Array.from({ length: this.numPlayers }, () => new Set()); // To track player discs on the board
         this.clues = clues;
@@ -18,7 +17,6 @@ class game{
     }
 
     nextPlayer(){
-        this.prevPlayer = this.currPlayer;
         if (this.currPlayer<this.numPlayers-1){
             this.currPlayer++;
         }
@@ -28,19 +26,9 @@ class game{
     }//nextPlayer()
 
     changePlayer(player){
-        this.prevPlayer = this.currPlayer;
-        this.currPlayer = player-1;
+        this.currPlayer = player;
     }//changePlayer(player)
-
-    goToCurrPlayer(){
-        this.currPlayer = this.prevPlayer;
-        if (this.currPlayer===0){
-            this.prevPlayer = this.numPlayers - 1;
-        }
-        else{
-            this.prevPlayer = this.currPlayer-1;
-        }
-    }    
+   
 }
 
 class boardInfo {
@@ -58,7 +46,8 @@ class boardInfo {
                     try {
                         let result;
                         if (btnId === "btnAsk") {
-                            result = await this.askQuestion();
+                            result = false; 
+                            await this.askQuestion();
                         } else if (btnId === "btnSearch") {
                             result = await this.handleSearchClicks();
                         }
@@ -110,7 +99,6 @@ class boardInfo {
         document.getElementById("btnSearch").style.display = 'none';
 
         const info = document.getElementById("instructions");
-        
         info.innerHTML = "Choose a tile";
         let clickedDivId = await this.tileListener();
         
@@ -122,29 +110,32 @@ class boardInfo {
         selectElement.style.display='inline';
 
         try{
+            const currentPlayer = this.gameInstance.getCurrPlayer();
             const player = await this.getPlayerToAsk();
             this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Asked player "+player,clickedDivId);
-            this.gameInstance.changePlayer(player);
+            this.gameInstance.changePlayer(player-1);
             this.nextClue(this.gameInstance.getCurrPlayer());
             selectElement.style.display='none';
             document.getElementById("getSelectedValueBtn").style.display = 'none';
+
             info.innerHTML = "Can the monster be here according to your clue? Choose below."
             document.getElementById("btnYes").style.display = 'block';
             document.getElementById("btnNo").style.display = 'block';
+            
             const clickedButtonId = await this.yesNoButtonListener();
             document.getElementById("btnYes").style.display = 'none';
             document.getElementById("btnNo").style.display = 'none';
+            
             if(clickedButtonId==="btnYes"){
-                //put disc on board
                 //this.placeDisc(this.gameInstance.getCurrPlayer(),clickedDivId);
                 this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered yes",clickedDivId);
                 document.getElementById(clickedDivId).childNodes[0].src ="img/disc.png";
-                this.gameInstance.goToCurrPlayer();
+                this.gameInstance.changePlayer(currentPlayer);
             }
             else{
                 //put cube on board
                 this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered no",clickedDivId);
-                this.gameInstance.goToCurrPlayer();
+                this.gameInstance.changePlayer(currentPlayer);
                 document.getElementById(clickedDivId).childNodes[0].src ="img/disc.png";
                 this.nextClue(this.gameInstance.getCurrPlayer());
 
@@ -158,10 +149,6 @@ class boardInfo {
         catch(error){
             console.error("Error:", error);
         }
-        
-
-
-        
         // Resolve the Promise after asking the question
         return Promise.resolve();
     }
@@ -174,10 +161,8 @@ class boardInfo {
             const clickHandler = (event) => {
                 const clickedDivId = event.target.id;
                 if (clickedDivId) {
-                   // divContainer.removeEventListener("click", clickHandler);
-                    resolve(clickedDivId); // Resolve the Promise with the ID of the clicked div
-                    // Remove the event listener after the first click
                     divContainer.removeEventListener("click", clickHandler);
+                    resolve(clickedDivId); // Resolve the Promise with the ID of the clicked div
                 } else {
                     reject("No div ID found."); // Reject the Promise if no ID is found
                 }
@@ -249,78 +234,75 @@ class boardInfo {
 
     async handleSearchClicks() {
         const originalSearcher = this.gameInstance.getCurrPlayer();
-        let allYes = true;  // Variable to track if all buttons clicked were "yes"
+        let allYes = true;
     
         document.getElementById("btnAsk").style.display = 'none';
         document.getElementById("btnSearch").style.display = 'none';
     
-        // Place pawn and declare search
         const info = document.getElementById("instructions");
         info.innerHTML = "Choose a tile for your search";
-        let searchSpace = await this.tileListener();
-        this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Chose to search",searchSpace);
-        this.placePawn(searchSpace);
-        // Ensure placement of player's own disc
-        //this.placeDisc(originalSearcher, searchSpace);
     
-        // Move to the next player
-        this.gameInstance.nextPlayer();
-        this.nextClue(this.gameInstance.getCurrPlayer());
+        try {
+            console.log(originalSearcher);
+            let searchSpace = await this.tileListener();
+            console.log("chose")
+            this.recordInstance.recordMove(originalSearcher, "Chose to search", searchSpace);
+            this.placePawn(searchSpace);
     
-        while (originalSearcher !== this.gameInstance.getCurrPlayer()) {
-            info.innerHTML = "Can the monster be here according to your clue?";
-            const currentPlayer = this.gameInstance.getCurrPlayer();
-            try {
-                this.nextClue(currentPlayer);
+            // Move to the next player and provide the next clue
+            this.gameInstance.nextPlayer();
+            console.log(this.gameInstance.getCurrPlayer());
+            this.nextClue(this.gameInstance.getCurrPlayer());
     
-                document.getElementById("btnYes").style.display = 'block';
-                document.getElementById("btnNo").style.display = 'block';
+            while (originalSearcher !== this.gameInstance.getCurrPlayer()) {
+                info.innerHTML = "Can the monster be here according to your clue?";
+                const currentPlayer = this.gameInstance.getCurrPlayer();
     
-                const clickedButtonId = await this.yesNoButtonListener();
-                console.log("Clicked on button with ID:", clickedButtonId);
+                try {
+                    this.nextClue(currentPlayer);
     
-                document.getElementById("btnYes").style.display = 'none';
-                document.getElementById("btnNo").style.display = 'none';
+                    document.getElementById("btnYes").style.display = 'block';
+                    document.getElementById("btnNo").style.display = 'block';
     
-                if (clickedButtonId === "btnYes") {
-                   // if (this.canPlaceDisc(currentPlayer, searchSpace)) {
-                        this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered yes to search",searchSpace);
-                        document.getElementById(searchSpace).childNodes[0].src ="img/disc.png";
+                    const clickedButtonId = await this.yesNoButtonListener();
+                    console.log("Clicked on button with ID:", clickedButtonId);
+    
+                    document.getElementById("btnYes").style.display = 'none';
+                    document.getElementById("btnNo").style.display = 'none';
+    
+                    if (clickedButtonId === "btnYes") {
+                        console.log("yes");
+                        this.recordInstance.recordMove(currentPlayer, "Answered yes to search", searchSpace);
+                        document.getElementById(searchSpace).childNodes[0].src = "img/disc.png";
                         this.placeDisc(currentPlayer, searchSpace);
-                   // }
-                } else if (clickedButtonId === "btnNo") {
-                    this.recordInstance.recordMove(this.gameInstance.getCurrPlayer(),"Answered no to search",searchSpace);
-                    allYes = false;
-                    document.getElementById(searchSpace).childNodes[0].src ="img/cube.png";
-                    this.placeCube(currentPlayer, searchSpace);
+                    } else if (clickedButtonId === "btnNo") {
+                        this.recordInstance.recordMove(currentPlayer, "Answered no to search", searchSpace);
+                        allYes = false;
+                        document.getElementById(searchSpace).childNodes[0].src = "img/cube.png";
+                        this.placeCube(currentPlayer, searchSpace);
+                        this.gameInstance.changePlayer(originalSearcher);
+                        break;
+                    } else {
+                        console.log("Player passes their turn");
+                    }
+    
+                    this.gameInstance.nextPlayer();
+                    console.log(this.gameInstance.getCurrPlayer());
+                } catch (error) {
+                    console.error("Error during player response:", error);
                     break;
-                } else {
-                    console.log("Player passes their turn");
                 }
-    
-                this.gameInstance.nextPlayer();
-                console.log(this.gameInstance.getCurrPlayer());
-            } catch (error) {
-                console.error("Error:", error);
-                break;
-            }
+            } //while
+
+        } catch (error) {
+            console.error("Error during tile selection:", error);
         }
     
-        // If a player placed a cube, ensure the next player after the original searcher is set
-        if (!allYes) {
-            // Move to the player immediately after the original searcher
-            do {
-                this.gameInstance.nextPlayer();
-            } while (this.gameInstance.getCurrPlayer() !== originalSearcher);
-            //this.gameInstance.nextPlayer();
-        }
-    
-        // Ensure the final clue is given to the current player after the loop
         this.nextClue(this.gameInstance.getCurrPlayer());
     
-        return allYes;  // Return the result
+        return allYes;
     }
-    
+        
     placeDisc(player,space){
         this.gameInstance.playerDiscs[player].add(space);
         const hex = document.getElementById(space);
@@ -336,18 +318,13 @@ class boardInfo {
     }
 
     placeCube(player,space){
-       // if (document.getElementById(space).classList.contains("middle")){
             this.gameInstance.playerCubes[player].add(space);
-            //add cube to board
             const hex = document.getElementById(space);
             if (hex.querySelector('img')===null){
                 let cube = document.createElement('img');
                 cube.src = "img/cube.png"
                 hex.appendChild(cube);
             }
-            // Add image on block
-            
-      //  }
     }
 
     placePawn(space){
@@ -359,8 +336,6 @@ class boardInfo {
             }
     }
 }
-
-
 
 async function runGame(numPlayers,clues,hint){
     const gameRecord = new GameRecord();
@@ -387,8 +362,7 @@ async function runGame(numPlayers,clues,hint){
         }
     };//while
     
-    
-    gameRecord.saveJSON(gameRecord.toJSON(),"idk");
+    gameRecord.saveJSON(gameRecord.toJSON(),"GameRecord");
 }
 
 class PlayerMove {
