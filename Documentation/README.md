@@ -1,0 +1,1 @@
+Here you will find a documentation guideline to help you through the navigation process of this documentation structure. This guideline also contains a summary of what we did throughout the project and provides links to access certain documentation if needed.
